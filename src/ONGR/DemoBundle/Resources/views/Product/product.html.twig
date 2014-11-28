@@ -30,6 +30,28 @@
     <p class="text-center">Powered by: <a href="http://www.wine-searcher.com/"><strong>http://www.wine-searcher.com/</strong></a></p>
 {% endblock %}
 
+{% block reviews %}
+    <div class="panel-heading">
+        Reviews
+    </div>
+    <div class="panel-body">
+        {% if product.reviews|length > 0 %}
+            {% for review in product.reviews %}
+                <div class="panel-heading">
+                    <strong>{{ review.name }}</strong> - {{ review.createdAt }}
+                    <div class="pull-right">
+                        {% include 'ONGRDemoBundle:Product:inc/rating.html.twig' with {rating: review.rating} %}
+                    </div>
+                </div>
+                <div class="panel-body">{{ review.review }}</div>
+                {% if not loop.last %}<hr/>{% endif %}
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">This product has not been reviewed yet.</div>
+        {% endif %}
+    </div>
+{% endblock %}
+
 {% block content %}
     {{ parent() }}
     <div class="row">
@@ -44,6 +66,10 @@
         <div class="col-sm-7">
             <div class="panel panel-default product-panel">
                 {{ block('about') }}
+            </div>
+
+            <div class="panel panel-default product-panel">
+                {{ block('reviews') }}
             </div>
         </div>
     </div>
