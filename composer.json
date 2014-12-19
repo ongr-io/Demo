@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.5.*",
+        "symfony/symfony": "~2.6",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
@@ -24,12 +24,15 @@
         "ongr/content-bundle": "~0.1",
         "ongr/pager-bundle": "dev-master",
         "ongr/router-bundle": "~0.2",
-        "ongr/ssi-bundle": "v0.3.0"
+        "ongr/ssi-bundle": "v0.3.0",
+        "squizlabs/php_codesniffer": "~1"
+
 
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "~4.3"
+        "phpunit/phpunit": "~4.3",
+        "ongr/ongr-strict-standard": "~1.0.0-beta"
     },
     "scripts": {
         "post-root-package-install": [
