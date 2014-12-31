@@ -14,7 +14,7 @@ namespace ONGR\DemoBundle\Document;
 use ONGR\ElasticsearchBundle\Annotation as ES;
 use ONGR\ElasticsearchBundle\Document\DocumentInterface;
 use ONGR\ElasticsearchBundle\Document\DocumentTrait;
-use ONGR\ContentBundle\Document\CategoryTrait;
+use ONGR\ContentBundle\Document\Traits\CategoryTrait;
 use ONGR\RouterBundle\Document\SeoAwareTrait;
 
 /**
@@ -34,11 +34,4 @@ class Category implements DocumentInterface
      * @ES\Property(name="slug", type="string", index="not_analyzed")
      */
     public $slug;
-
-    /**
-     * @var string
-     *
-     * @ES\Property(name="title", type="string", search_analyzer="standard")
-     */
-    public $title;
 }
