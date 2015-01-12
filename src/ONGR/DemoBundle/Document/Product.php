@@ -154,7 +154,7 @@ class Product implements DocumentInterface
     /**
      * @var ProductReview
      *
-     * @ES\Property(name="reviews", type="object", objectName="ONGRDemoBundle:ProductReview")
+     * @ES\Property(name="reviews", type="object", multiple=true, objectName="ONGRDemoBundle:ProductReview")
      */
     public $reviews;
 

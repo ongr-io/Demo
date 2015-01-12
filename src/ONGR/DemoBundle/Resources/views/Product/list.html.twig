@@ -42,25 +42,33 @@
 
     {% block product_list %}
         <div class="row">
-        {% for product in filter_manager.getResult %}
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="thumbnail product-thumbnail">
-                    {% set product_url = path('ongr_product', { 'document': product }) %}
-                    <div class="product-image-container">
-                        <a href="{{ product_url }}">
-                            <img src="{{ product.image }}" class="img-rounded" alt="Product image"/>
-                        </a>
+            {% if filter_manager.result is not empty %}
+                {% for product in filter_manager.getResult %}
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="thumbnail product-thumbnail">
+                            {% set product_url = path('ongr_product', { 'document': product }) %}
+                            <div class="product-image-container">
+                                <a href="{{ product_url }}">
+                                    <img src="{{ product.image }}" class="img-rounded" alt="Product image"/>
+                                </a>
+                            </div>
+                            <h5 class="product-title text-center">
+                                <a href="{{ product_url }}">{{ product.title }}</a>
+                            </h5>
+                            
+                            <p class="text-center">
+                                {% include 'ONGRDemoBundle:Product:inc/rating.html.twig' with {rating: getAverageRating(product.reviews)} %}
+                                <br/>
+                                <strong class="text-warning thumbnail-price">€ {{ product.price }}</strong>
+                            </p>
+                            
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    <h5 class="product-title">
-                        <a href="{{ product_url }}">{{ product.title }}</a>
-                    </h5>
-
-                    <strong class="text-warning thumbnail-price">€ {{ product.price }}</strong>
-
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        {% endfor %}
+                {% endfor %}
+            {% else %}
+                <div class="alert alert-warning text-center" role="alert">No products found.</div>
+            {% endif %}
         </div>
     {% endblock %}
 
