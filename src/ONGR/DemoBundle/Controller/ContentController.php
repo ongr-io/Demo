@@ -97,7 +97,7 @@ class ContentController extends Controller
      */
     protected function snippetActionData($slug)
     {
-        return $this->get('ongr_content.content_service')->getDataForSnippet($slug);
+        return $this->get('ongr_content.content_service')->getDocumentBySlug($slug);
     }
 
     /**
@@ -110,9 +110,15 @@ class ContentController extends Controller
      */
     public function snippetAction($slug, $template)
     {
+        $document = $this->snippetActionData($slug);
+
         return $this->render(
             $template,
-            $this->snippetActionData($slug)
+            [
+                'content' => $document->content,
+                'title' => $document->title,
+                'document' => $document,
+            ]
         );
     }
 }
