@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6665b0840f2eaf7061fbf95eefd7ca64",
+    "hash": "17feb6d95c372b4d061cdfb8d6026b7f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1118,25 +1118,26 @@
         },
         {
             "name": "ongr/content-bundle",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ongr-io/ContentBundle.git",
-                "reference": "f251b94c99b2498855c02f78de301b30c3ab17ea"
+                "reference": "694516cd2674613e13f7ce9237fc0b5880d45db9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ongr-io/ContentBundle/zipball/f251b94c99b2498855c02f78de301b30c3ab17ea",
-                "reference": "f251b94c99b2498855c02f78de301b30c3ab17ea",
+                "url": "https://api.github.com/repos/ongr-io/ContentBundle/zipball/694516cd2674613e13f7ce9237fc0b5880d45db9",
+                "reference": "694516cd2674613e13f7ce9237fc0b5880d45db9",
                 "shasum": ""
             },
             "require": {
                 "ongr/elasticsearch-bundle": "~0.1",
+                "ongr/router-bundle": "~0.1",
                 "php": ">=5.4",
                 "symfony/symfony": "~2.3"
             },
             "require-dev": {
-                "ongr/router-bundle": "~0.1",
+                "ongr/ongr-strict-standard": "~1.0.0-beta",
                 "phpunit/phpunit": "~4.1",
                 "squizlabs/php_codesniffer": "~1.5"
             },
@@ -1161,7 +1162,7 @@
             ],
             "description": "Main content bundle to handle category, product and content data.",
             "homepage": "http://ongr.io",
-            "time": "2014-10-30 12:59:42"
+            "time": "2014-12-02 12:56:40"
         },
         {
             "name": "ongr/elasticsearch-bundle",

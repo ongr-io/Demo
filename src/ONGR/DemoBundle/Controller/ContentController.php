@@ -97,7 +97,7 @@ class ContentController extends Controller
      */
     protected function snippetActionData($slug)
     {
-        return $this->get('ongr_content.content_service')->getDataForSnippet($slug);
+        return $this->get('ongr_content.content_service')->getDocumentBySlug($slug);
     }
 
     /**
