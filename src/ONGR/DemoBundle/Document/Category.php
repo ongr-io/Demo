@@ -34,5 +34,4 @@ class Category implements DocumentInterface
      * @ES\Property(name="slug", type="string", index="not_analyzed")
      */
     public $slug;
-
 }

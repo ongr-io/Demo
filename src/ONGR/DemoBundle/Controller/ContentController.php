@@ -114,11 +114,11 @@ class ContentController extends Controller
 
         return $this->render(
             $template,
-              [
-                  'content' => $document->content,
-                  'title' => $document->title,
-                  'document' => $document,
-              ]
+            [
+                'content' => $document->content,
+                'title' => $document->title,
+                'document' => $document,
+            ]
         );
     }
 }
