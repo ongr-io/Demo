@@ -34,7 +34,7 @@ Either install or upgrade `vagrant <https://www.vagrantup.com/downloads.html>`_.
 
 .. code-block:: bash
 
-    vagrant plugin install vagrant-hostsupdater
+    vagrant plugin install vagrant-hostmanager
 
 ..
 
