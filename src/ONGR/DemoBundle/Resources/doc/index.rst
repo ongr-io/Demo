@@ -34,7 +34,7 @@ Either install or upgrade `vagrant <https://www.vagrantup.com/downloads.html>`_.
 
 .. code-block:: bash
 
-    vagrant plugin install vagrant-hostsupdater
+    vagrant plugin install vagrant-hostmanager
 
 ..
 
@@ -78,10 +78,10 @@ In case to get demo content you need to run the following commands from command 
     vagrant ssh
     cd /var/www
     composer install --no-interaction
-    app/console es:index:create
-    app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/contents.json
-    app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/categories.json
-    app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/products.json
+    php app/console es:index:create
+    php app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/contents.json
+    php app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/categories.json
+    php app/console es:index:import --raw src/ONGR/DemoBundle/Resources/data/products.json
 
 ..
 
