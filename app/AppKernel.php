@@ -20,9 +20,12 @@ class AppKernel extends Kernel
             //Third party
             new ONGR\DemoBundle\ONGRDemoBundle(),
             new ONGR\ElasticsearchBundle\ONGRElasticsearchBundle(),
-            new ONGR\RouterBundle\ONGRRouterBundle(),
             new ONGR\FilterManagerBundle\ONGRFilterManagerBundle(),
             new ONGR\ContentBundle\ONGRContentBundle(),
+            new ONGR\ConnectionsBundle\ONGRConnectionsBundle(),
+            new ONGR\RouterBundle\ONGRRouterBundle(),
+            new ONGR\ProcessWireConnectorBundle\ONGRProcessWireConnectorBundle(),
+            new ONGR\DemoProcessWireBundle\ONGRDemoProcessWireBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

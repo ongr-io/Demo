@@ -16,3 +16,5 @@ parameters:
     asset_reset: 1
     top_cms_links:
       - about
+      - child-page-example-1
+      - child-page-example-2

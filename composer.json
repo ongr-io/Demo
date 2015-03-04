@@ -6,6 +6,12 @@
     "autoload": {
         "psr-0": { "": "src/" }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ongr-io/ProcessWireConnectorBundle.git"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.6",
@@ -18,12 +24,11 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-
         "ongr/elasticsearch-bundle": "~0.8",
         "ongr/filter-manager-bundle": "~0.4",
         "ongr/content-bundle": "~0.4",
-        "ongr/router-bundle": "~0.3"
-
+        "ongr/router-bundle": "~0.3",
+        "ongr/processwire-connector-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

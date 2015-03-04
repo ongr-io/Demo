@@ -9,22 +9,22 @@
 {% endblock %}
 
 {% block title %}
-    {{ content.title }} | {{ parent() }}
+    {{ document.title }} | {{ parent() }}
 {% endblock %}
 
 {% block top_cms_links %}
     {% for slug in top_cms_links %}
-        <li {% if app.request.get('_route') == 'ongr_content_document_page' and content.slug == slug %}class="active"{% endif %}>
+        <li {% if app.request.get('_route') == 'ongr_content_document_page' and document.slug == slug %}class="active"{% endif %}>
             {{ snippet(slug, 'ONGRDemoBundle:Content:link.html.twig') }}
         </li>
     {% endfor %}
 {% endblock %}
 
 {% block breadcrumbs_inner %}
-    <li class="active">{{ content.title }}</li>
+    <li class="active">{{ document.title }}</li>
 {% endblock %}
 
 {% block content %}
     {{ parent() }}
-    {{ include(template_from_string(content.content)) }}
+    {{ include(template_from_string(document.content)) }}
 {% endblock %}
