@@ -42,9 +42,9 @@ class ProductReview
     public $rating;
 
     /**
-     * @var string
+     * @var \DateTime
      *
-     * @ES\Property(name="created_at", type="string")
+     * @ES\Property(name="created_at", type="date")
      */
     public $createdAt;
 }
