@@ -22,11 +22,4 @@ use ONGR\OXIDConnectorBundle\Entity\Category as Base;
  */
 class Category extends Base
 {
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="\ONGR\DemoOXIDBundle\Entity\SeoCategory", mappedBy="category")
-     * })
-     */
-    protected $seoUrls;
 }

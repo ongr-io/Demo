@@ -6,3 +6,5 @@ parameters:
     # binlog parameters
     ongr_connections.sync.diff_provider.binlog_dir: /var/lib/mysql
     ongr_connections.sync.diff_provider.binlog_basename: mysql-bin
+
+    ongr_oxid.seo_finder_service.repository: DemoOXIDBundle:Seo

@@ -280,7 +280,7 @@ ongr_connections:
     active_shop: oxid
     shops:
         oxid:
-            shop_id: 0
+            shop_id: oxbaseshop
     sync:
         sync_storage:
             mysql:
@@ -293,6 +293,6 @@ ongr_oxid:
             tags:
                 @shop_tag: '_1'
                 @lang_tag: ''
-            shop_id: 0
+            shop_id: oxbaseshop
             lang_id: 0
     entity_namespace: ONGROXIDConnectorBundle

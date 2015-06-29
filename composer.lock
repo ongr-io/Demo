@@ -1229,21 +1229,21 @@
         },
         {
             "name": "ongr/connections-bundle",
-            "version": "v0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ongr-io/ConnectionsBundle.git",
-                "reference": "d9f3b3164e5b352a9879108e51225f2888b7cf4b"
+                "reference": "d8db145e758479526a8c372905f41773b72d5b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ongr-io/ConnectionsBundle/zipball/d9f3b3164e5b352a9879108e51225f2888b7cf4b",
-                "reference": "d9f3b3164e5b352a9879108e51225f2888b7cf4b",
+                "url": "https://api.github.com/repos/ongr-io/ConnectionsBundle/zipball/d8db145e758479526a8c372905f41773b72d5b7d",
+                "reference": "d8db145e758479526a8c372905f41773b72d5b7d",
                 "shasum": ""
             },
             "require": {
                 "doctrine/orm": "~2.5",
-                "ongr/elasticsearch-bundle": ">=0.9,<2",
+                "ongr/elasticsearch-bundle": "~0.9",
                 "ongr/router-bundle": "~0.4",
                 "php": ">=5.4",
                 "symfony/monolog-bundle": "~2.0",
@@ -1275,7 +1275,7 @@
                 }
             ],
             "description": "Connections bundle for ONGR platform",
-            "time": "2015-05-28 10:58:52"
+            "time": "2015-06-23 06:52:49"
         },
         {
             "name": "ongr/content-bundle",
@@ -1430,12 +1430,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ongr-io/OXIDConnectorBundle.git",
-                "reference": "206bc4ac383226b723b878372da7c3fdeba43fe4"
+                "reference": "de348b96f20abe174572dc6d77c2f1f25f129bf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ongr-io/OXIDConnectorBundle/zipball/206bc4ac383226b723b878372da7c3fdeba43fe4",
-                "reference": "206bc4ac383226b723b878372da7c3fdeba43fe4",
+                "url": "https://api.github.com/repos/ongr-io/OXIDConnectorBundle/zipball/de348b96f20abe174572dc6d77c2f1f25f129bf5",
+                "reference": "de348b96f20abe174572dc6d77c2f1f25f129bf5",
                 "shasum": ""
             },
             "require": {
@@ -1469,7 +1469,7 @@
             ],
             "description": "OXID connector for ONGR framework",
             "homepage": "http://ongr.io",
-            "time": "2015-06-19 08:23:45"
+            "time": "2015-06-29 07:16:19"
         },
         {
             "name": "ongr/router-bundle",
@@ -1527,18 +1527,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ongr-io/TranslationsBundle.git",
-                "reference": "d9d3c69c7097268ee293f7f0e05159a7dff7d9b5"
+                "reference": "9b64bef8bdf87419f67c818869467c122a51b37f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ongr-io/TranslationsBundle/zipball/d9d3c69c7097268ee293f7f0e05159a7dff7d9b5",
-                "reference": "d9d3c69c7097268ee293f7f0e05159a7dff7d9b5",
+                "url": "https://api.github.com/repos/ongr-io/TranslationsBundle/zipball/9b64bef8bdf87419f67c818869467c122a51b37f",
+                "reference": "9b64bef8bdf87419f67c818869467c122a51b37f",
                 "shasum": ""
             },
             "require": {
                 "friendsofsymfony/jsrouting-bundle": "~1.5",
                 "ongr/elasticsearch-bundle": "~0.9",
-                "ongr/filter-manager-bundle": "~0.4",
+                "ongr/filter-manager-bundle": "~0.5",
                 "symfony/symfony": "~2.6"
             },
             "require-dev": {
@@ -1565,7 +1565,7 @@
             ],
             "description": "ONGR translations bundle",
             "homepage": "http://ongr.io",
-            "time": "2015-06-10 12:33:34"
+            "time": "2015-06-25 05:57:03"
         },
         {
             "name": "pimple/pimple",
@@ -3262,16 +3262,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.3.2",
+            "version": "2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404"
+                "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
-                "reference": "e96d8579fbed0c95ecf2a0501ec4f307a4aa6404",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/c1a26c729508f73560c1a4f767f60b8ab6b4a666",
+                "reference": "c1a26c729508f73560c1a4f767f60b8ab6b4a666",
                 "shasum": ""
             },
             "require": {
@@ -3332,7 +3332,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2015-04-28 23:28:20"
+            "time": "2015-06-24 03:16:23"
         }
     ],
     "aliases": [],
