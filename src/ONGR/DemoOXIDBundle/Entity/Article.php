@@ -22,11 +22,4 @@ use ONGR\OXIDConnectorBundle\Entity\Article as Base;
  */
 class Article extends Base
 {
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     *
-     * @ORM\OneToMany(targetEntity="\ONGR\DemoOXIDBundle\Entity\SeoArticle", mappedBy="article")
-     * })
-     */
-    protected $seoUrls;
 }

@@ -12,14 +12,14 @@
 namespace ONGR\DemoOXIDBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ONGR\OXIDConnectorBundle\Entity\Content as Base;
+use ONGR\OXIDConnectorBundle\Entity\Seo as ParentSeo;
 
 /**
- * A class to test ONGR\OXIDConnectorBundle\Entity\Content abstract class.
+ * Seo Entity.
  *
  * @ORM\Entity
- * @ORM\Table(name="oxcontents")
+ * @ORM\Table(name="oxseo")
  */
-class Content extends Base
+class Seo extends ParentSeo
 {
 }

@@ -1,5 +1,5 @@
 parameters:
-    ongr_demo.oxid.sync.execute.shop_id: 0
+    ongr_demo.oxid.sync.execute.shop_id: oxbaseshop
     ongr_demo.oxid.sync.execute.chunk_size: 1
 
     ongr_demo.oxid.sync.execute.finish.class: ONGR\DemoOXIDBundle\EventListener\ImportFinishEventListener
@@ -46,6 +46,7 @@ services:
         arguments: [ "@ongr_oxid.attr_to_doc_service" ]
         calls:
            - [ setLanguageId, [%ongr_oxid.language_id%] ]
+           - [ setSeoFinderService, [ @ongr_oxid.seo_finder_service ] ]
         tags:
             - { name: kernel.event_listener, event: ongr.pipeline.sync.execute.oxid.product.modify, method: onModify }
 
@@ -81,6 +82,7 @@ services:
         arguments: [ "@ongr_oxid.attr_to_doc_service" ]
         calls:
            - [ setLanguageId, [%ongr_oxid.language_id%] ]
+           - [ setSeoFinderService, [ @ongr_oxid.seo_finder_service ] ]
         tags:
             - { name: kernel.event_listener, event: ongr.pipeline.sync.execute.oxid.category.modify, method: onModify }
 
@@ -116,6 +118,7 @@ services:
         arguments: [ "@ongr_oxid.attr_to_doc_service" ]
         calls:
            - [ setLanguageId, [%ongr_oxid.language_id%] ]
+           - [ setSeoFinderService, [ @ongr_oxid.seo_finder_service ] ]
         tags:
             - { name: kernel.event_listener, event: ongr.pipeline.sync.execute.oxid.content.modify, method: onModify }
 
