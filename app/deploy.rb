@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:kazgurs/ongr-sandbox.git'
 set :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/dev/'
+set :deploy_to, '/tmp/'
 
 # Default value for :scm is :git
 set :scm, :archive
@@ -23,7 +23,7 @@ set :scm, :archive
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('app/config/parameters.yml')
+#set :linked_files, fetch(:linked_files, []).push('app/config/parameters.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('app/logs')
