@@ -35,7 +35,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('app/logs')
 # set :keep_releases, 5
 
 set :archive_cache, true
-set :cache_path, "build"
+set :tmp_dir, "build"
 
 namespace :deploy do
 
