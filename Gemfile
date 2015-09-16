@@ -1,5 +1,3 @@
 source 'http://rubygems.org'
 
-gem 'ongr_deploy'
-gem 'compass'
-gem 'sass'
+gem 'compass', '~> 1.0.3'

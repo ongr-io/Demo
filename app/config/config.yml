@@ -40,7 +40,7 @@ assetic:
     ruby: "bundle exec"
     filters:
         cssrewrite: ~
-        sass: 
+        sass:
             bin: sass
         compass:
             bin: compass
