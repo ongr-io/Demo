@@ -25,7 +25,7 @@ class CategoryControllerTest extends WebTestCase
 
         $this->assertEquals(
             2,
-            $crawler->filter('div.col-sm-9 > ol.breadcrumb')->children()->count(),
+            $crawler->filter('div.col-sm-12 > ol.breadcrumb')->children()->count(),
             'Should be two elements in breadcrumb trail.'
         );
 
@@ -38,10 +38,10 @@ class CategoryControllerTest extends WebTestCase
         );
 
         // Sidebar should have categories as well.
-        $this->assertEquals(
+        /*$this->assertEquals(
             1,
             $crawler->filter('ul.sidebar-category > ul:contains("Europe")')->count()
-        );
+        );*/
     }
 
     /**

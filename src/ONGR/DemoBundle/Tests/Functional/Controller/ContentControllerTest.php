@@ -38,8 +38,8 @@ class ContentControllerTest extends WebTestCase
 
         $this->assertGreaterThan(
             0,
-            $crawler->filter('html:contains("demo")')->count(),
-            'Should be a word "demo" in html content'
+            $crawler->filter('html:contains("Demo")')->count(),
+            'Should be a word "Demo" in html content'
         );
     }
 
