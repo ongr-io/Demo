@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app_locales: en|fr|de
 
 framework:
     #esi:             ~
@@ -50,12 +51,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -96,7 +91,6 @@ ongr_filter_manager:
     managers:
         product_list:
             filters:
-#                - category
                 - search
                 - pager
                 - sorting
@@ -106,10 +100,6 @@ ongr_filter_manager:
                 - app_category
             repository: 'es.manager.default.product'
     filters:
-#        field_value:
-#            category:
-#                field: category_keys
-#                value: "mens-clothing"
         choice:
             color:
                 request_field: 'c'
@@ -154,5 +144,6 @@ ongr_api:
             endpoints:
                 product:
                     repository: es.manager.default.product
+                    variants: true
                 category:
                     repository: es.manager.default.category
