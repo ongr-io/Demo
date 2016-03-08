@@ -19,8 +19,6 @@ use ONGR\RouterBundle\Document\SeoAwareTrait;
  */
 class Category
 {
-    use SeoAwareTrait;
-
     /**
      * @var string
      *
@@ -36,30 +34,30 @@ class Category
     public $key;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $title;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $description;
 
     /**
      * @var string
      *
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @ES\Property(type="string", options={"index"="not_analyzed"}, name="parent_key")
      */
     public $parentKey;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $picture;
 
@@ -69,4 +67,11 @@ class Category
      * @ES\Property(type="integer")
      */
     public $sortKey;
+
+    /**
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
+     */
+    public $url;
 }

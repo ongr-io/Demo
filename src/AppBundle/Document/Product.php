@@ -10,8 +10,6 @@ use ONGR\RouterBundle\Document\SeoAwareTrait;
  */
 class Product
 {
-    use SeoAwareTrait;
-
     /**
      * @ES\Id()
      */
@@ -23,12 +21,16 @@ class Product
     public $key;
 
     /**
-     * @ES\Property(type="string")
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $title;
 
     /**
-     * @ES\Property(type="string")
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $description;
 
@@ -38,17 +40,23 @@ class Product
     public $brand;
 
     /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $color;
 
     /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $material;
 
     /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @var Image
+     *
+     * @ES\Embedded(class="AppBundle:Image")
      */
     public $images;
 
@@ -61,4 +69,18 @@ class Product
      * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $categoryKeys;
+
+    /**
+     * @var Variant
+     *
+     * @ES\Embedded(class="AppBundle:Variant\Variant")
+     */
+    public $variants;
+
+    /**
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
+     */
+    public $url;
 }

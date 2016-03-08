@@ -19,8 +19,6 @@ use ONGR\RouterBundle\Document\SeoAwareTrait;
  */
 class Content
 {
-    use SeoAwareTrait;
-
     /**
      * @var string
      *
@@ -29,23 +27,23 @@ class Content
     public $id;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $slug;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $title;
 
     /**
-     * @var string
+     * @var MultiLanguages
      *
-     * @ES\Property(type="string")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $content;
 }

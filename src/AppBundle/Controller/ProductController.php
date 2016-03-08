@@ -41,7 +41,7 @@ class ProductController extends Controller
         );
     }
 
-    public function showAction(Product $document)
+    public function showAction(Request $request, Product $document)
     {
         return $this->render(
             'product/show.html.twig',
