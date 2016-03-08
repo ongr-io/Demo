@@ -42,6 +42,8 @@ header:
 
 footer:
     copyright: © %year% Powered by ONGR™. All Rights Reserved.
+    demo_only: This shop is for demo purposes only. If you want to buy these products - please go to <a href="http://www.design-3000.de">www.design-3000.de</a>
+    imprint: Imprint
     info:
         title: Information
         specials: Specials

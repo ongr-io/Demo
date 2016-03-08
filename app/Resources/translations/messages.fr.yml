@@ -1,0 +1,77 @@
+filter:
+    sorting: Trier:
+    brand: Marque
+    color: Couleur
+    material: Matériel
+    all: Tout
+
+topbar:
+    my_account: Mon compte
+    my_orders: Mes commandes
+    my_credit_slips: Mes notes de crédit
+    my_addresses: My addresses
+    my_personal_info: Mes adresses
+    my_vouchers: Mes bons
+    my_wishlist: Ma liste d'envies (%count%)
+    no_products: Aucun produit
+    watch_list: Watch List (%count%)
+    sign_in_or_register: <a href="%sign_in%">Se connecter</a> ou <a href="%register%">Registre</a>
+
+language:
+    english: English
+    german: Deutsch
+    spanish: Español
+    french: Français
+
+currency:
+    dollar: Dollar
+    euro: Euro
+    pound: Livre
+
+header:
+    cart:
+        title: Chariot:
+        empty: (Vide)
+        tax: Taxe:
+        total: Total:
+        checkout: La Caisse
+        show_cart: Voir le panier
+    search: Chercher...
+    toggle_navigation: Basculer la navigation
+    menu: Menu
+
+footer:
+    copyright: © %year% Propulsé par ONGR™. Tous les Droits Sont Réservés.
+    demo_only: Cette boutique est uniquement à des fins de démonstration. Si vous voulez acheter ces produits - s'il vous plaît aller à <a href="http://www.design-3000.de">www.design-3000.de</a>
+    imprint: Imprimer
+    info:
+        title: Information
+        specials: Spéciale
+        new_products: Nouveaux produits
+        top_sellers: Meilleures ventes
+        our_stores: Nos magasins
+        contact_us: Contactez nous
+    useful_links:
+        title: Liens utiles
+        about_us: À propos de nous
+        delivery: Livraison
+        legal_notice: Mention légale
+        secure_payment: Paiement sécurisé
+        terms_conditions: Termes et Conditions
+    latest_tweets: Derniers Tweets
+    facebook: Facebook
+
+home:
+    view_more: Voir Plus
+    buy_now: Acheter maintenant!
+
+product:
+    manufacturer: Fabricant:
+    grape: Grain de raisin:
+    alcohol_level: Degré d'alcool:
+    wine_colour: Couleur du vin:
+    wine_style: Type de vin:
+    more_info: Plus d'informations
+    attributes: Les attributs
+    qantity: Quantité:
+    add_to_cart: Ajouter au panier
