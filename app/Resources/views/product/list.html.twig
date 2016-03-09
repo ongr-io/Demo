@@ -24,7 +24,7 @@
                 <a data-toggle="dropdown" href="#" class="btn btn-sm btn-default">
                     {{ ('filter.' ~ filter.name)|trans }}
                     {% for choice in filter.choices %}
-                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ choice.label }}{% endif %}
+                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ choice.label|trans }}{% endif %}
                     {% endfor %}
                     <span class="caret"></span>
                 </a>
@@ -32,7 +32,7 @@
                     {% for choice in filter.choices %}
                         {% if not (choice.active or (choice.default and not filter.state.active)) %}
                             {#<li><a href="{{ path(block('page_route'), choice.getUrlParameters()) }}">{{ choice.label }}</a></li>#}
-                            <li><a href="#">{{ choice.label }}</a></li>
+                            <li><a href="#">{{ choice.label|trans }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -44,7 +44,7 @@
 {% block content %}
 
     {% block list_header %}
-        <h2 class="list-page-header-title">{% block list_title %}{{ category.title }}{% endblock %}</h2>
+        <h2 class="list-page-header-title">{% block list_title %}{{ category.title|translation_text }}{% endblock %}</h2>
     {% endblock %}
 
     {{ block('sorting') }}
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <h5 class="product-title">
-                        <a class="product-link" href="{{ product_url }}">{{ product.title }}</a>
+                        <a class="product-link" href="{{ product_url }}">{{ product.title|translation_text }}</a>
                     </h5>
                     <strong class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</strong>
                 </div>

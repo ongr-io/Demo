@@ -4,6 +4,10 @@ filter:
     color: Farbe
     material: Stoff
     all: Alle
+    price_asc: Preis aufsteigend
+    price_desc: Preis absteigend
+    title_asc: Titel aufsteigend
+    title_desc: Titel absteigend
 
 topbar:
     my_account: Mein Konto
@@ -18,10 +22,10 @@ topbar:
     sign_in_or_register: <a href="%sign_in%">Anmelden</a> oder <a href="%register%">Neu Registrieren</a>
 
 language:
-    english: English
-    german: Deutsch
-    spanish: Español
-    french: Français
+    en: English
+    de: Deutsch
+    es: Español
+    fr: Français
 
 currency:
     dollar: Dollar

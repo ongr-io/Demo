@@ -126,10 +126,10 @@ ongr_filter_manager:
             sorting:
                 request_field: 'sort'
                 choices:
-                    - { label: Price ascending, field: price, default: true }
-                    - { label: Price descending, field: price, order: desc }
-                    - { label: Title ascending, field: title }
-                    - { label: Title descending, field: title, order: desc }
+                    - { label: filter.price_asc, field: price, default: true }
+                    - { label: filter.price_desc, field: price, order: desc }
+                    - { label: filter.title_asc, field: title }
+                    - { label: filter.title_desc, field: title, order: desc }
 
 ongr_router:
     seo_routes:

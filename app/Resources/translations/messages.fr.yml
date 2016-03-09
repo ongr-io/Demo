@@ -4,6 +4,10 @@ filter:
     color: Couleur
     material: Matériel
     all: Tout
+    price_asc: Prix ascendant
+    price_desc: Prix décroissant
+    title_asc: Titre ascendant
+    title_desc: Titre décroissant
 
 topbar:
     my_account: Mon compte
@@ -18,10 +22,10 @@ topbar:
     sign_in_or_register: <a href="%sign_in%">Se connecter</a> ou <a href="%register%">Registre</a>
 
 language:
-    english: English
-    german: Deutsch
-    spanish: Español
-    french: Français
+    en: English
+    de: Deutsch
+    es: Español
+    fr: Français
 
 currency:
     dollar: Dollar

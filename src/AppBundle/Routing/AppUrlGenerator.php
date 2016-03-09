@@ -79,7 +79,14 @@ class AppUrlGenerator extends ProviderBasedGenerator
     {
         try {
             $document = $parameters['document'];
-            $locale = $this->context->getParameters()['_locale'];
+
+            if (isset($parameters['locale'])) {
+                $locale = $parameters['locale'];
+                unset($parameters['locale']);
+            } else {
+                $locale = $this->context->getParameters()['_locale'];
+            }
+
             $this->nameHandle($name);
             if (is_object($document)) {
                 $documentUrl = isset($document->url)? $document->url->$locale->url:null;

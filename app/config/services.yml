@@ -38,6 +38,7 @@ services:
         calls:
             - [ setRequestStack, ["@request_stack"]]
             - [ setUrlGenerator, ["@router"]]
+            - [ setOngrGenerator, ["@app.url_generator"]]
         tags:
             - { name: twig.extension }
 
