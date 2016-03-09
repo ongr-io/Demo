@@ -10,7 +10,7 @@
     <link rel="canonical" href="{{ path('ongr_route', { 'document' : product }) }}">
 {% endblock %}
 
-{% block vaiants %}
+{% block variants %}
     <div class="product-variant-select">
         <h4 class="list-head">Please choose color:</h4>
         <div class="product-variants">
@@ -54,7 +54,7 @@
                 Brand: {{ product.brand }} <br/>
             </p>
 
-            {{ block('vaiants') }}
+            {{ block('variants') }}
         </div>
 
         {#<div class="alert alert-success" role="alert">Successfully added to cart</div>#}
@@ -87,7 +87,6 @@
                         </a>
                     {% endfor %}
                 </div>
-
                 {{ block('product_content') }}
             </div>
         </div>
