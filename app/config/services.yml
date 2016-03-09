@@ -37,3 +37,19 @@ services:
         arguments: ["@router", %app_locales%, %locale%]
         tags:
             - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    ongr_router.elasticsearch_route_provider:
+        class: AppBundle\Routing\AppRouteProvider
+        arguments: ["@es.metadata_collector", %ongr_router.seo_routes%]
+
+    app.url_generator:
+        class: AppBundle\Routing\AppUrlGenerator
+        arguments: ["@ongr_router.elasticsearch_route_provider", "@?logger"]
+        calls:
+            - [ setCollector, [ "@es.metadata_collector" ] ]
+
+    ongr_router.dynamic_router:
+            class: Symfony\Cmf\Component\Routing\DynamicRouter
+            arguments: ["@router.request_context", "@ongr_router.nested_matcher", "@app.url_generator", '', "@event_dispatcher", "@ongr_router.elasticsearch_route_provider"]
+            tags:
+                - { name: router, priority: -100 }

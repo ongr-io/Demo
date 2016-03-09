@@ -20,7 +20,7 @@ class Language
     /**
      * @var string
      *
-     * @ES\Property(type="string")
+     * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $url;
 } 
