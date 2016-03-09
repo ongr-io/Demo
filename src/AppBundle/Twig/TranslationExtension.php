@@ -6,7 +6,7 @@ use AppBundle\Document\Language\MultiLanguages;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class LanguageExtension extends \Twig_Extension
+class TranslationExtension extends \Twig_Extension
 {
     /**
      * @var RequestStack

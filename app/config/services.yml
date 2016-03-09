@@ -49,7 +49,7 @@ services:
 
     ongr_router.elasticsearch_route_provider:
         class: AppBundle\Routing\AppRouteProvider
-        arguments: ["@es.metadata_collector", %ongr_router.seo_routes%]
+        arguments: ["@es.metadata_collector", %ongr_router.seo_routes%, %app_locales%]
 
     app.url_generator:
         class: AppBundle\Routing\AppUrlGenerator

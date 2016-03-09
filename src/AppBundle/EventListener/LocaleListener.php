@@ -50,13 +50,5 @@ class LocaleListener
 
             return;
         }
-
-        // Set locale to request
-        $localePattern = '/^\/([a-z]{2})\/.*$/i';
-        $matches = [];
-        if (preg_match($localePattern, $requestPath, $matches) &&
-            isset($matches[1]) && in_array($matches[1], $this->locales)) {
-            $request->setLocale($matches[1]);
-        }
     }
 }

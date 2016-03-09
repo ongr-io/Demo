@@ -40,15 +40,21 @@ class AppRouteProvider implements RouteProviderInterface
     private $collector;
 
     /**
+     * @var Locales
+     */
+    private $locales;
+
+    /**
      * ElasticsearchRouteProvider constructor.
      *
      * @param MetadataCollector $collector
      * @param array $routeMap
      */
-    public function __construct($collector, array $routeMap = [])
+    public function __construct($collector, array $routeMap = [], $locales)
     {
         $this->collector = $collector;
         $this->routeMap = $routeMap;
+        $this->locales = explode('|', trim($locales));
     }
 
     /**
@@ -84,6 +90,9 @@ class AppRouteProvider implements RouteProviderInterface
         if (!$this->manager) {
             throw new \Exception('Manager must be set to execute query to the elasticsearch');
         }
+
+        // Set locale to request
+        $this->setRequestLocale($request);
 
         $routeCollection = new RouteCollection();
         $requestPath = $request->getPathInfo();
@@ -134,5 +143,22 @@ class AppRouteProvider implements RouteProviderInterface
     {
         // Returns empty Route collection.
         return new RouteCollection();
+    }
+
+    /**
+     * Set locale to the request
+     *
+     * @param Request $request
+     */
+    private function setRequestLocale($request)
+    {
+        $requestPath = $request->getPathInfo();
+
+        $localePattern = '/^\/([a-z]{2})\/.*$/i';
+        $matches = [];
+        if (preg_match($localePattern, $requestPath, $matches) &&
+            isset($matches[1]) && in_array($matches[1], $this->locales)) {
+            $request->setLocale($matches[1]);
+        }
     }
 }
