@@ -18,6 +18,11 @@ class TranslationExtension extends \Twig_Extension
      */
     private $urlGenerator;
 
+    /**
+     * @var UrlGeneratorInterface
+     */
+    private $ongrGenerator;
+
     private $locales;
 
     /**
@@ -27,7 +32,7 @@ class TranslationExtension extends \Twig_Extension
      */
     public function __construct($locales)
     {
-        $this->locales = $locales;
+        $this->locales = explode('|', $locales);
     }
 
     /**
@@ -47,12 +52,20 @@ class TranslationExtension extends \Twig_Extension
     }
 
     /**
+     * @param UrlGeneratorInterface $ongrGenerator
+     */
+    public function setOngrGenerator($ongrGenerator)
+    {
+        $this->ongrGenerator = $ongrGenerator;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
-            new \Twig_Function('renderTranslationSelection', [$this, 'renderTranslationSelection'], [
+            new \Twig_Function('render_translation_selection', [$this, 'renderTranslationSelection'], [
                 'is_safe' => array('html'),
                 'needs_environment' => true
             ])
@@ -65,26 +78,58 @@ class TranslationExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_Filter('translationText', [$this, 'getTranslationText']),
-            new \Twig_Filter('translationUrl', [$this, 'getTranslationUrl'])
+            new \Twig_Filter('translation_text', [$this, 'getTranslationText']),
+            new \Twig_Filter('translation_url', [$this, 'getTranslationUrl'])
         ];
     }
 
-    public function renderTranslationSelection(\Twig_Environment $twig, $document)
+    /**
+     * @param \Twig_Environment $twig
+     * @param $document
+     * @return string
+     */
+    public function renderTranslationSelection(\Twig_Environment $twig, $document = null)
     {
-        throw \Exception('Not implement');
+        $defaultLocale = $this->getCurrentLocale();
+
+        $locales = [];
+        $route = $this->requestStack->getCurrentRequest()->get('_route');
+        foreach ($this->locales as $locale) {
+            if ($locale == $defaultLocale) {
+                continue;
+            }
+
+            $locales[$locale] = in_array($route, ['app_homepage', 'app_search_page']) ?
+                $this->urlGenerator->generate($route, ['_locale' => $locale]) :
+                $this->ongrGenerator->generate('ongr_route', ['document' => $document, 'locale' => $locale]);
+        }
+
+        return $twig->render('::inc/languages.html.twig', [
+            'defaultLocale' => $defaultLocale,
+            'locales' => $locales
+        ]);
     }
 
-    public function getTranslationText(MultiLanguages $doc, $locale)
+    /**
+     * @param null|MultiLanguages $doc
+     * @param null|string $locale
+     * @return string
+     */
+    public function getTranslationText($doc, $locale = null)
     {
         $locale = $locale ?: $this->getCurrentLocale();
-        return $doc->{ $locale }->text;
+        return $doc ? $doc->{ $locale }->text : '';
     }
 
-    public function getTranslationUrl(MultiLanguages $doc, $locale)
+    /**
+     * @param null|MultiLanguages $doc
+     * @param null|string $locale
+     * @return string
+     */
+    public function getTranslationUrl($doc, $locale = null)
     {
         $locale = $locale ?: $this->getCurrentLocale();
-        return $doc->{ $locale }->url;
+        return $doc ? $doc->{ $locale }->url : '';
     }
 
     /**
