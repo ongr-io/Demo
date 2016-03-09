@@ -32,6 +32,15 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.translation_extension:
+        class: AppBundle\Twig\TranslationExtension
+        arguments: [%app_locales%]
+        calls:
+            - [ setRequestStack, ["@request_stack"]]
+            - [ setUrlGenerator, ["@router"]]
+        tags:
+            - { name: twig.extension }
+
     app.locale_listener:
         class: AppBundle\EventListener\LocaleListener
         arguments: ["@router", %app_locales%, %locale%]
