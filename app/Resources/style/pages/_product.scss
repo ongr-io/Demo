@@ -1,22 +1,35 @@
 .product-page {
   margin-bottom: 20px;
   color: #666;
+
+  .product-content-wrapper {
+    float: left;
+    width: 60%;
+  }
+
+  .product-media {
+    width: 40%;
+  }
+
   .product-image {
     border: 1px solid #E6E6E6;
     max-width: 100%;
   }
+
   .product-title {
     margin: 0;
     font: normal 20px/26px Georgia;
     display: block;
     padding-bottom: 18px;
   }
+
   .product-price {
     font-family: Gerogia;
     color: #c5988b;
     font-size: 24px;
     line-height: 40px;
   }
+
   .product-quantity-container {
     margin-bottom: 20px;
     .product-quantity-title {
@@ -32,6 +45,7 @@
       padding: 0 10px;
     }
   }
+
   .product-add-to-cart {
     margin-left: 15px;
     background-color: #7a7975;
@@ -48,6 +62,7 @@
       background: #e1423c;
     }
   }
+
   .product-desc-list {
     margin: 0;
     padding: 0;
@@ -56,6 +71,7 @@
       font: normal 13px/20px Georgia;
     }
   }
+
   .product-more-info {
     margin: 30px 0;
     .nav-tabs {
@@ -86,6 +102,19 @@
       .tab-pane {
         font: normal 13px/18px Georgia;
       }
+    }
+  }
+
+  .product-variants {
+    display: inline-block;
+    .product-variant {
+      cursor: pointer;
+      float: left;
+      position: relative;
+      overflow: visible;
+      width: 62px;
+      height: 62px;
+      margin: 0 12px 12px 0;
     }
   }
 }

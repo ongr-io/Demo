@@ -3,7 +3,8 @@
 namespace AppBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use ONGR\RouterBundle\Document\SeoAwareTrait;
+use AppBundle\Document\Language\MultiLanguages;
+use AppBundle\Document\Variant\Variant;
 
 /**
  * @ES\Document()
@@ -56,7 +57,7 @@ class Product
     /**
      * @var Image
      *
-     * @ES\Embedded(class="AppBundle:Image")
+     * @ES\Embedded(class="AppBundle:Image", multiple=true)
      */
     public $images;
 
@@ -73,7 +74,7 @@ class Product
     /**
      * @var Variant
      *
-     * @ES\Embedded(class="AppBundle:Variant\Variant")
+     * @ES\Embedded(class="AppBundle:Variant\Variant", multiple=true)
      */
     public $variants;
 

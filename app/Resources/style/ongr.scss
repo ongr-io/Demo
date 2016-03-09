@@ -1,6 +1,9 @@
 // Vendor
 @import "./bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Libs
+@import "libs/smoothproducts";
+
 // Utils
 @import "utils/mixins";
 @import "utils/scroll-top";

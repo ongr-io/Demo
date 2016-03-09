@@ -26,6 +26,10 @@ gulp.task('scripts', function() {
             dir.bootstrapJS + 'carousel.js',
             dir.bootstrapJS + 'dropdown.js',
             dir.bootstrapJS + 'tab.js',
+            // smooth products
+            dir.bower + 'smooth-products/js/smoothproducts.min.js',
+            // components
+            dir.assets + 'scripts/components/*.js',
             // Main JS file
             dir.assets + 'scripts/main.js'
         ])

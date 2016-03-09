@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-(function($) {
+(function($, Ongr) {
     var ONGR = {
         /**
          * Global DOM selectors
@@ -35,7 +35,9 @@
             },
             featuredCarousel:    '#featured-carousel',
             footerDropdown:      '.js-footer-dropdown-trigger',
-            scrollTop:           '.scroll-top'
+            scrollTop:           '.scroll-top',
+            smoothProducts:      '.product-media',
+            variants:            '.product-variants .product-variant'
         },
 
         /**
@@ -61,6 +63,9 @@
             this.bindFooterDropdown(g.footerDropdown);
 
             this.bindScrollTop(g.scrollTop);
+
+            this.bindSmoothProducts(g.smoothProducts);
+            this.bindProductVariantSelected(g.variants);
         },
 
         /**
@@ -199,9 +204,26 @@
             $(carousel).carousel({
                 interval: 3000
             });
+        },
+
+        /**
+         *
+         * @param smoothProducts
+         */
+        bindSmoothProducts: function(smoothProducts) {
+            $(smoothProducts).smoothproducts();
+        },
+
+        bindProductVariantSelected: function(variants) {
+            var product = new Ongr.Product();
+            $(variants).each(function(i, variant) {
+                $(variant).unbind('click');
+                $(variant).bind('click', function() {
+                    product.get('0fa9d6025471d7c03fae1b6f8789aacb');
+                });
+            });
         }
     };
 
     var App = Object.create(ONGR); App.init();
-})(jQuery);
-
+})(jQuery, Ongr);

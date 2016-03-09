@@ -3,15 +3,35 @@
 {% import '::macros/breadcrumbs.html.twig' as breadcrumbs_macros %}
 
 {% block title %}
-    {{ product.title }} - {{ parent() }}
+    {{ product.title | translationText }} - {{ parent() }}
 {% endblock %}
 
 {% block canonical_meta %}
     <link rel="canonical" href="{{ path('ongr_route', { 'document' : product }) }}">
 {% endblock %}
 
+{% block vaiants %}
+    <div class="product-variant-select">
+        <h4 class="list-head">Please choose color:</h4>
+        <div class="product-variants">
+            {% for variantId, variant in product.variants %}
+                <div class="product-variant">
+                    <span class="hidden variant-id">{{ variantId }}</span>
+                    {% if attribute(variant.color, app.request.locale).image %}
+                        <div class="product-thumbnail">
+                            <img src="{{ attribute(variant.color, app.request.locale).image }}" width="60" height="60" />
+                        </div>
+                    {% else %}
+                        {{ variant.color | translationText }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
 {% block about %}
-    <h2 class="product-title">{{ product.title }}</h2>
+    <h2 class="product-title">{{ product.title | translationText }}</h2>
     <div class="product-more-info">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.more_info'|trans }}</a></li>
@@ -20,14 +40,17 @@
             <div role="tabpanel" class="tab-pane active" id="more_info">
 
                 <p>
-                    {{ product.description|raw }}
+                    {{ product.description | translationText | raw }}
                 </p>
 
                 <p>
-                    Color: {{ product.color }} <br/>
-                    Material: {{ product.material }} <br/>
+                    Color: {{ product.color | translationText }} <br/>
+                    Material: {{ product.material | translationText }} <br/>
                     Brand: {{ product.brand }} <br/>
                 </p>
+
+                {{ block('vaiants') }}
+
             </div>
         </div>
     </div>
@@ -53,11 +76,17 @@
     {{ parent() }}
     <div class="product-page">
         <div class="row">
-            <div class="col-sm-5 col-md-5 col-lg-6">
-                <img class="product-image" src="{{ product_image(product) }}"/>
-            </div>
-            <div class="col-sm-7 col-md-7 col-lg-6">
-                {{ block('about') }}
+            <div class="col-xs-12">
+                <div class="product-media sp-wrap">
+                    {% for image in product.images %}
+                        <a href="{{ image.thumbnail }}" class="sp-default">
+                            <img src="{{ image.image }}" alt="">
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="product-content-wrapper">
+                    {{ block('about') }}
+                </div>
             </div>
         </div>
     </div>

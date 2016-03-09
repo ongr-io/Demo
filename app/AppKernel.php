@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new ONGR\RouterBundle\ONGRRouterBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new ONGR\ApiBundle\ONGRApiBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new AppBundle\AppBundle(),
         ];
 
