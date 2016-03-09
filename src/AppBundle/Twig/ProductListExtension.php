@@ -50,11 +50,8 @@ class ProductListExtension extends \Twig_Extension
      */
     public function getProductImage($product)
     {
-        try {
-            $image = $product->images[0];
-            return $image;
-        } catch (\Exception $e) {
-            return 'no_image';
+        foreach ($product->images as $image) {
+            return $image->thumbnail ?: 'no_image';
         }
     }
 
