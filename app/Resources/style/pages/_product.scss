@@ -1,120 +1,118 @@
 .product-page {
   margin-bottom: 20px;
-  color: #666;
-
-  .product-content-wrapper {
+  color: $color_storm_dust_approx;
+  .product-content {
     float: left;
     width: 60%;
+    background: $white;
+    padding: $padding-base;
   }
-
   .product-media {
     width: 40%;
   }
-
   .product-image {
-    border: 1px solid #E6E6E6;
+    border: 1px solid $color_mercury_approx;
     max-width: 100%;
   }
-
   .product-title {
     margin: 0;
-    font: normal 20px/26px Georgia;
+    font: normal 20px/26px $font_0;
     display: block;
     padding-bottom: 18px;
   }
-
   .product-price {
-    font-family: Gerogia;
-    color: #c5988b;
+    font-family: $font_1;
+    color: $color_quicksand_approx;
     font-size: 24px;
     line-height: 40px;
   }
-
   .product-quantity-container {
     margin-bottom: 20px;
     .product-quantity-title {
       font-weight: normal;
-      font-family: Georgia;
+      font-family: $font_0;
       margin-right: 4px;
     }
     .product-quantity-inp {
-      border: 1px solid rgb(189, 194, 201);
+      border: 1px solid $color_submarine_approx;
       width: 100px;
       height: 23px;
-      font-family: Georgia;
+      font-family: $font_0;
       padding: 0 10px;
     }
   }
-
   .product-add-to-cart {
     margin-left: 15px;
-    background-color: #7a7975;
+    background-color: $color_tapa_approx;
     height: 40px;
     width: 140px;
     text-align: center;
-    font-family: Georgia;
-    color: #fff;
+    font-family: $font_0;
+    color: $white;
     border: 0;
     outline: 0;
     position: relative;
     top: -4px;
     &:hover {
-      background: #e1423c;
+      background: $color_cinnabar_approx;
     }
   }
-
   .product-desc-list {
     margin: 0;
     padding: 0;
     .product-desc-list-item {
       list-style: none;
-      font: normal 13px/20px Georgia;
+      font: normal 13px/20px $font_0;
     }
   }
-
   .product-more-info {
     margin: 30px 0;
-    .nav-tabs {
-      li {
-        a {
-          color: #666 !important;
-          line-height: 27px;
-          padding: 0 10px;
-          height: 27px;
-          background: #e0e0e0;
-          -webkit-border-radius: 0;
-          -moz-border-radius: 0;
-          border-radius: 0;
-          font-family: Georgia;
-          border-color: #E6E6E6 !important;
-        }
-        &.active > a {
-          background: #fff;
-          border-bottom: 0;
-        }
-      }
-    }
     .tab-content {
-      padding: 22px;
-      background: #fff;
-      border: 1px solid #ddd;
+      padding: $padding-base;
+      background: $white;
+      border: 1px solid $color_alto_approx;
       border-top: 0;
       .tab-pane {
-        font: normal 13px/18px Georgia;
+        font: normal 13px/18px $font_0;
+      }
+    }
+    .nav-tabs li {
+      a {
+        color: $color_storm_dust_approx !important;
+        line-height: 27px;
+        padding: 0 10px;
+        height: 27px;
+        background: $color_bon_jour_approx;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0;
+        font-family: $font_0;
+        border-color: $color_mercury_approx !important;
+      }
+      &.active > a {
+        background: $white;
+        border-bottom: 0;
       }
     }
   }
-
-  .product-variants {
-    display: inline-block;
-    .product-variant {
-      cursor: pointer;
-      float: left;
-      position: relative;
-      overflow: visible;
-      width: 62px;
-      height: 62px;
-      margin: 0 12px 12px 0;
+  .product-variant-select {
+    .list-head {
+      font-size: 1.1em;
+      font-weight: bold;
+    }
+    .product-variants {
+      display: inline-block;
+      .product-variant {
+        cursor: pointer;
+        float: left;
+        position: relative;
+        overflow: visible;
+        width: 62px;
+        height: 62px;
+        margin: 0 12px 12px 0;
+        &:hover {
+          border: 1px solid $color_gallery_approx;
+        }
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
 {% import '::macros/breadcrumbs.html.twig' as breadcrumbs_macros %}
 
 {% block title %}
-    {{ product.title | translationText }} - {{ parent() }}
+    {{ product.title | translation_text }} - {{ parent() }}
 {% endblock %}
 
 {% block canonical_meta %}
@@ -14,6 +14,7 @@
     <div class="product-variant-select">
         <h4 class="list-head">Please choose color:</h4>
         <div class="product-variants">
+            <span class="hidden product-id">{{ product.id }}</span>
             {% for variantId, variant in product.variants %}
                 <div class="product-variant">
                     <span class="hidden variant-id">{{ variantId }}</span>
@@ -22,7 +23,7 @@
                             <img src="{{ attribute(variant.color, app.request.locale).image }}" width="60" height="60" />
                         </div>
                     {% else %}
-                        {{ variant.color | translationText }}
+                        {{ variant.color | translation_text }}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -30,53 +31,55 @@
     </div>
 {% endblock %}
 
-{% block about %}
-    <h2 class="product-title">{{ product.title | translationText }}</h2>
-    <div class="product-more-info">
+{% block product_details %}
+    <div class="product-details product-more-info">
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.more_info'|trans }}</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="more_info">
-
-                <p>
-                    {{ product.description | translationText | raw }}
-                </p>
-
-                <p>
-                    Color: {{ product.color | translationText }} <br/>
-                    Material: {{ product.material | translationText }} <br/>
-                    Brand: {{ product.brand }} <br/>
-                </p>
-
-                {{ block('vaiants') }}
-
+                {{ product.description | translation_text | raw }}
             </div>
         </div>
     </div>
+{% endblock %}
 
-    {#<div class="alert alert-success" role="alert">Successfully added to cart</div>#}
+{% block product_content %}
+    <div class="product-content">
+        <h2 class="product-title">{{ product.title | translation_text }}</h2>
+        <div class="product-info">
+            <p>
+                Color: {{ product.color | translation_text }} <br/>
+                Material: {{ product.material | translation_text }} <br/>
+                Brand: {{ product.brand }} <br/>
+            </p>
 
-    <form action="{{ shop_url_origin }}" method="post">
-        <div>
-            <input type="hidden" name="aid" value="{{ product.id }}"/>
-            <input type="hidden" name="fnc" value="tobasket">
-            <input type="hidden" name="referer" value="{{ product.url }}">
+            {{ block('vaiants') }}
         </div>
-        <div class="product-quantity-container clearfix">
-            <label for="quantity" class="product-quantity-title pull-left">{{ 'product.qantity'|trans }}</label>
-            <input id="quantity" name="am" type="text" value="1" class="product-quantity-inp pull-left">
-        </div>
-        <span class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</span>
-        <button class="product-add-to-cart">{{ 'product.add_to_cart'|trans }}</button>
-    </form>
+
+        {#<div class="alert alert-success" role="alert">Successfully added to cart</div>#}
+
+        <form action="{{ shop_url_origin }}" method="post">
+            <div>
+                <input type="hidden" name="aid" value="{{ product.id }}"/>
+                <input type="hidden" name="fnc" value="tobasket">
+                <input type="hidden" name="referer" value="{{ product.url }}">
+            </div>
+            <div class="product-quantity-container clearfix">
+                <label for="quantity" class="product-quantity-title pull-left">{{ 'product.qantity'|trans }}</label>
+                <input id="quantity" name="am" type="text" value="1" class="product-quantity-inp pull-left">
+            </div>
+            <span class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</span>
+            <button class="product-add-to-cart">{{ 'product.add_to_cart'|trans }}</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block content %}
     {{ parent() }}
     <div class="product-page">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-xs-12 product-info">
                 <div class="product-media sp-wrap">
                     {% for image in product.images %}
                         <a href="{{ image.thumbnail }}" class="sp-default">
@@ -84,9 +87,13 @@
                         </a>
                     {% endfor %}
                 </div>
-                <div class="product-content-wrapper">
-                    {{ block('about') }}
-                </div>
+
+                {{ block('product_content') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {{ block('product_details') }}
             </div>
         </div>
     </div>

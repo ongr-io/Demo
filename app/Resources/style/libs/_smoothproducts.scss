@@ -13,7 +13,7 @@ $color_tundora_approx: #444;
   width: 60px;
   height: 60px;
   border: 1px solid $color_gallery_approx;
-  margin: 0 10px 20px 0;
+  margin: 0 10px 10px 0;
   overflow: hidden;
   opacity: .3;
   display: inline-block;
@@ -64,7 +64,7 @@ $color_tundora_approx: #444;
   //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
   border-radius: 3px;
   position: relative;
-  margin: 0 0 15px 0;
+  margin: 0;
   float: left;
 }
 .sp-thumbs {
@@ -102,8 +102,6 @@ $color_tundora_approx: #444;
   left: 0;
   width: auto;
   height: auto;
-  min-width: 340px;
-  min-height: 340px;
   border: 1px solid #ccc;
   margin: 0 25px 8px 0;
   a {

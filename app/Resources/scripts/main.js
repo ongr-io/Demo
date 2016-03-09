@@ -37,7 +37,9 @@
             footerDropdown:      '.js-footer-dropdown-trigger',
             scrollTop:           '.scroll-top',
             smoothProducts:      '.product-media',
-            variants:            '.product-variants .product-variant'
+            productId:           '.product-variants .product-id',
+            variants:            '.product-variants .product-variant',
+            variantId:           '.variant-id'
         },
 
         /**
@@ -216,10 +218,13 @@
 
         bindProductVariantSelected: function(variants) {
             var product = new Ongr.Product();
+            var productId = $(this.globals.productId).text();
+            var variantIdSelector = this.globals.variantId;
             $(variants).each(function(i, variant) {
+                var variantId = $(variant).find(variantIdSelector).text();
                 $(variant).unbind('click');
                 $(variant).bind('click', function() {
-                    product.get('0fa9d6025471d7c03fae1b6f8789aacb');
+                    product.getVariant(productId, variantId);
                 });
             });
         }
