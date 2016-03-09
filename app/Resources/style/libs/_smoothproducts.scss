@@ -1,0 +1,193 @@
+//colors
+$color_gallery_approx: #eee;
+$color_suva_gray_approx: #888;
+$black: rgb(0, 0, 0);
+$black_90: rgba(0, 0, 0, .9);
+$white: #fff;
+$color_tundora_approx: #444;
+
+//@extend-elements
+//original selectors
+//.sp-thumbs a:link, .sp-thumbs a:visited
+%extend_1 {
+  width: 60px;
+  height: 60px;
+  border: 1px solid $color_gallery_approx;
+  margin: 0 10px 10px 0;
+  overflow: hidden;
+  opacity: .3;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: all .2s ease-out;
+}
+
+//original selectors
+//#sp-prev, #sp-next
+%extend_2 {
+  position: absolute;
+  top: 50%;
+  margin-top: -25px;
+  z-index: 501;
+  color: $white;
+  padding: 14px;
+  text-decoration: none;
+  background: $black;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 25px;
+  border: 2px solid $white;
+  width: 50px;
+  height: 50px;
+  //Instead of the line below you could use @include box-sizing($bs)
+  box-sizing: border-box;
+  //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+  transition: .2s;
+}
+
+.sp-loading {
+  text-align: center;
+  max-width: 270px;
+  padding: 15px;
+  border: 5px solid $color_gallery_approx;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 3px;
+  font-size: 12px;
+  color: $color_suva_gray_approx;
+}
+.sp-wrap {
+  display: none;
+  line-height: 0;
+  font-size: 0;
+  background: none;
+  border: none;
+  //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+  border-radius: 3px;
+  position: relative;
+  margin: 0;
+  float: left;
+}
+.sp-thumbs {
+  text-align: left;
+  display: inline-block;
+  img {
+    min-height: 50px;
+    min-width: 50px;
+    max-width: 50px;
+  }
+  a {
+    &:link {
+      @extend %extend_1;
+    }
+    &:visited {
+      @extend %extend_1;
+    }
+    &:hover {
+      opacity: 1;
+    }
+    &:active {
+      opacity: 1!important;
+      position: relative;
+    }
+  }
+}
+.sp-current {
+  opacity: 1!important;
+  position: relative;
+}
+.sp-large {
+  position: relative;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  border: 1px solid #ccc;
+  margin: 0 25px 8px 0;
+  a {
+    display: block;
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+.sp-zoom {
+  position: absolute;
+  left: -50%;
+  top: -50%;
+  cursor: zoom-in;
+  display: none;
+}
+.sp-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: $black;
+  background: $black_90;
+  z-index: 500;
+  display: none;
+  cursor: pointer;
+  img {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 90%;
+    max-height: 90%;
+    border: 2px solid $white;
+  }
+}
+#sp-prev {
+  @extend %extend_2;
+  left: 10px;
+  &:before {
+    content: '';
+    border: 7px solid transparent;
+    border-right: 15px solid $white;
+    position: absolute;
+    top: 16px;
+    left: 7px;
+  }
+  &:hover {
+    background: $color_tundora_approx;
+  }
+}
+#sp-next {
+  @extend %extend_2;
+  right: 10px;
+  &:before {
+    content: '';
+    border: 7px solid transparent;
+    border-left: 15px solid $white;
+    position: absolute;
+    top: 16px;
+    left: 18px;
+  }
+  &:hover {
+    background: $color_tundora_approx;
+  }
+}
+@media screen and(max-width: 400px) {
+  //original selectors
+  //#sp-prev, #sp-next
+  %extend_3 {
+    top: auto;
+    margin-top: 0;
+    bottom: 25px;
+  }
+
+  .sp-wrap {
+    margin: 0 0 15px 0;
+  }
+  #sp-prev {
+    @extend %extend_3;
+  }
+  #sp-next {
+    @extend %extend_3;
+  }
+}

@@ -137,7 +137,6 @@ ongr_router:
         category: AppBundle:Product:list
         content: AppBundle:Content:show
 
-
 ongr_api:
     versions:
         v3:
