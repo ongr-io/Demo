@@ -30,7 +30,7 @@
         };
 
         var focusVariant = function(obj) {
-            $(selectors.variants).removeClass('active');
+            $(obj).parent().children().removeClass('active');
             $(obj).addClass('active');
         };
 
