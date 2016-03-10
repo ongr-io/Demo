@@ -34,7 +34,7 @@
 {% block product_details %}
     <div class="product-details product-more-info">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.more_info'|trans }}</a></li>
+            <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.description'|trans }}</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="more_info">
@@ -63,7 +63,7 @@
             <div>
                 <input type="hidden" name="aid" value="{{ product.id }}"/>
                 <input type="hidden" name="fnc" value="tobasket">
-                <input type="hidden" name="referer" value="{{ product.url }}">
+                <input type="hidden" name="referer" value="{{ product.url | translation_url }}">
             </div>
             <div class="product-quantity-container clearfix">
                 <label for="quantity" class="product-quantity-title pull-left">{{ 'product.qantity'|trans }}</label>

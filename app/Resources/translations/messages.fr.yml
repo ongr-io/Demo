@@ -76,6 +76,7 @@ product:
     wine_colour: Couleur du vin:
     wine_style: Type de vin:
     more_info: Plus d'informations
+    description: La description
     attributes: Les attributs
     qantity: Quantité:
     add_to_cart: Ajouter au panier
