@@ -80,3 +80,9 @@ product:
     attributes: Les attributs
     qantity: Quantité:
     add_to_cart: Ajouter au panier
+
+imprint:
+    title: Imprimer
+    disclaimer:
+        title: Désistement
+        body: Le contenu de ce site sont créés avec le plus grand soin, mais le fournisseur ne peut pas garantir l'exactitude, l'exhaustivité et l'actualité. L'utilisation du contenu de ce site est aux risques et périls de l'utilisateur. Ce site contient des liens vers des sites tiers («liens externes»), qui sont de la responsabilité de l'opérateur. Le fournisseur n'a aucune influence sur la conception et le contenu des pages liées actuelle et future. L'inclusion de liens externes ne signifie pas que le fournisseur adopte le contenu derrière les références ou de liens. Le contrôle permanent sur les liens externes ne serait pas raisonnable pour le fournisseur sans preuves concrètes de violations. Suite à la connaissance des violations des droits, des liens externes seront immédiatement supprimés.
