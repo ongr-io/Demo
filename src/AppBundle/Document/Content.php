@@ -12,7 +12,6 @@
 namespace AppBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use ONGR\RouterBundle\Document\SeoAwareTrait;
 
 /**
  * @ES\Document()

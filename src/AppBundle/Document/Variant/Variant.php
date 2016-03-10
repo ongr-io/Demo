@@ -3,15 +3,12 @@
 namespace AppBundle\Document\Variant;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use ONGR\RouterBundle\Document\SeoAwareTrait;
 
 /**
  * @ES\Object
  */
 class Variant
 {
-    use SeoAwareTrait;
-
     /**
      * @var MultiLanguages
      *

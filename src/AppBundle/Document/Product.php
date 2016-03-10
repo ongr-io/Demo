@@ -3,8 +3,6 @@
 namespace AppBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use AppBundle\Document\Language\MultiLanguages;
-use AppBundle\Document\Variant\Variant;
 
 /**
  * @ES\Document()

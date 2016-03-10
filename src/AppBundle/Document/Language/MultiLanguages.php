@@ -3,14 +3,11 @@
 namespace AppBundle\Document\Language;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use ONGR\RouterBundle\Document\SeoAwareTrait;
 
 /**
  * @ES\Object
  */
 class MultiLanguages {
-
-    use SeoAwareTrait;
 
     /**
      * @var Language
