@@ -7,6 +7,8 @@
  * file that was distributed with this source code.
  */
 
+"strict mode";
+
 (function($, window) {
 
     var Product = function() {
@@ -17,11 +19,10 @@
             );
         };
 
-        var setApiGetProductVariantUrl = function(id, variantId) {
+        var setApiGetProductVariantUrl = function(id) {
             return Routing.generate('ongr_api_v3_product_get_variant',
                 {
-                    documentId: id,
-                    variantId: variantId
+                    documentId: id
                 }
             );
         };
@@ -33,9 +34,9 @@
                     method: 'GET'
                 });
             },
-            getVariant: function(id, variantId) {
+            getVariants: function(id) {
                 return $.ajax({
-                    url: setApiGetProductVariantUrl(id, variantId),
+                    url: setApiGetProductVariantUrl(id),
                     method: 'GET'
                 });
             }
@@ -43,7 +44,6 @@
     };
 
     window.Ongr = window.Ongr || {};
-    window.Ongr.Product = Product;
+    window.Ongr.Services = {Product: Product};
 
 })(jQuery, window);
-

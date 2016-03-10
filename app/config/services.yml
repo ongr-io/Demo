@@ -42,6 +42,13 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.product_variant_extension:
+        class: AppBundle\Twig\ProductVariantExtension
+        calls:
+            - [ setRequestStack, ["@request_stack"]]
+        tags:
+            - { name: twig.extension }
+
     app.locale_listener:
         class: AppBundle\EventListener\LocaleListener
         arguments: ["@router", %app_locales%, %locale%]

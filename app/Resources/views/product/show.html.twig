@@ -11,19 +11,36 @@
 {% endblock %}
 
 {% block variants %}
-    <div class="product-variant-select">
-        <h4 class="list-head">Please choose color:</h4>
-        <div class="product-variants">
-            <span class="hidden product-id">{{ product.id }}</span>
-            {% for variantId, variant in product.variants %}
+    <div class="product-variants">
+        <span class="hidden product-id">{{ product.id }}</span>
+        <div class="product-variant-colors">
+            <h4 class="list-head">Please choose color:</h4>
+            {% for color in product_colors(product.variants) %}
                 <div class="product-variant">
-                    <span class="hidden variant-id">{{ variantId }}</span>
-                    {% if attribute(variant.color, app.request.locale).image %}
+                    <span class="hidden product-color-name">{{ color | translation_text }}</span>
+                    {% set imge_url = attribute(color, app.request.locale).image %}
+                    {% if imge_url %}
                         <div class="product-thumbnail">
-                            <img src="{{ attribute(variant.color, app.request.locale).image }}" width="60" height="60" />
+                            <img src="{{ imge_url }}" width="60" height="60" />
                         </div>
                     {% else %}
-                        {{ variant.color | translation_text }}
+                        {{ color | translation_text }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="product-variant-materials">
+            <h4 class="list-head">Please choose material:</h4>
+            {% for material in product_materials(product.variants) %}
+                <div class="product-variant">
+                    <span class="hidden product-material-name">{{ material | translation_text }}</span>
+                    {% set imge_url = attribute(material, app.request.locale).image %}
+                    {% if imge_url %}
+                        <div class="product-thumbnail">
+                            <img src="{{ imge_url }}" width="60" height="60" />
+                        </div>
+                    {% else %}
+                        {{ material | translation_text }}
                     {% endif %}
                 </div>
             {% endfor %}
@@ -79,10 +96,10 @@
     {{ parent() }}
     <div class="product-page">
         <div class="row">
-            <div class="col-xs-12 product-info">
+            <div class="col-xs-12 product-info product-gallery">
                 <div class="product-media sp-wrap">
                     {% for image in product.images %}
-                        <a href="{{ image.thumbnail }}" class="sp-default">
+                        <a href="{{ image.thumbnail }}">
                             <img src="{{ image.image }}" alt="">
                         </a>
                     {% endfor %}

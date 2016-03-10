@@ -94,22 +94,23 @@
       }
     }
   }
-  .product-variant-select {
+  .product-variants {
     .list-head {
       font-size: 1.1em;
       font-weight: bold;
     }
-    .product-variants {
-      display: inline-block;
-      .product-variant {
-        cursor: pointer;
-        float: left;
-        position: relative;
-        overflow: visible;
-        width: 62px;
-        height: 62px;
-        margin: 0 12px 12px 0;
-        &:hover {
+    .product-variant-colors, .product-variant-materials {
+      display: block;
+    }
+    .product-variant {
+      cursor: pointer;
+      position: relative;
+      overflow: visible;
+      width: 62px;
+      height: 62px;
+      margin: 0 12px 12px 0;
+      &:hover, &.active {
+        .product-thumbnail {
           border: 1px solid $color_gallery_approx;
         }
       }

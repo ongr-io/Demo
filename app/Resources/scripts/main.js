@@ -35,11 +35,7 @@
             },
             featuredCarousel:    '#featured-carousel',
             footerDropdown:      '.js-footer-dropdown-trigger',
-            scrollTop:           '.scroll-top',
-            smoothProducts:      '.product-media',
-            productId:           '.product-variants .product-id',
-            variants:            '.product-variants .product-variant',
-            variantId:           '.variant-id'
+            scrollTop:           '.scroll-top'
         },
 
         /**
@@ -66,8 +62,8 @@
 
             this.bindScrollTop(g.scrollTop);
 
-            this.bindSmoothProducts(g.smoothProducts);
-            this.bindProductVariantSelected(g.variants);
+            var product = Ongr.Pages.Product();
+            product.init();
         },
 
         /**
@@ -205,27 +201,6 @@
         bindFeaturedCarousel: function(carousel) {
             $(carousel).carousel({
                 interval: 3000
-            });
-        },
-
-        /**
-         *
-         * @param smoothProducts
-         */
-        bindSmoothProducts: function(smoothProducts) {
-            $(smoothProducts).smoothproducts();
-        },
-
-        bindProductVariantSelected: function(variants) {
-            var product = new Ongr.Product();
-            var productId = $(this.globals.productId).text();
-            var variantIdSelector = this.globals.variantId;
-            $(variants).each(function(i, variant) {
-                var variantId = $(variant).find(variantIdSelector).text();
-                $(variant).unbind('click');
-                $(variant).bind('click', function() {
-                    product.getVariant(productId, variantId);
-                });
             });
         }
     };
