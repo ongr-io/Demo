@@ -12,6 +12,7 @@
 (function($, window) {
 
     var Product = function() {
+        var locale = appLocale;
         var selectors = {
             //productGallery:      '.product-gallery',
             productGalleryItem:  '#product-gallery-item',
@@ -55,10 +56,10 @@
 
         var checkVariantSelected = function(variants) {
             if (!colorSelected) {
-                colorSelected = variants[0]['color']['en']['text'];
+                colorSelected = variants[0]['color'][locale]['text'];
             }
             if (!materialSelected) {
-                materialSelected = variants[0]['material']['en']['text'];
+                materialSelected = variants[0]['material'][locale]['text'];
             }
         };
 
@@ -90,8 +91,8 @@
                 checkVariantSelected(variants);
                 $.each(variants, function(i, variant) {
                     if(mapVariant({
-                        'color': variant['color']['en']['text'],
-                        'material': variant['material']['en']['text']
+                        'color': variant['color'][locale]['text'],
+                        'material': variant['material'][locale]['text']
                     })) {
                         loadVariantImages(variant['images']);
                         return false;
