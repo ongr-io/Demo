@@ -101,8 +101,11 @@
     }
     .product-variant-colors, .product-variant-materials {
       display: block;
+      float: left;
+      width: 100%;
     }
     .product-variant {
+      float: left;
       cursor: pointer;
       position: relative;
       overflow: visible;
@@ -111,7 +114,7 @@
       margin: 0 12px 12px 0;
       &:hover, &.active {
         .product-thumbnail {
-          border: 1px solid $color_gallery_approx;
+          border: 1px solid #E57300;
         }
       }
     }
