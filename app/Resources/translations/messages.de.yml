@@ -80,3 +80,9 @@ product:
     attributes: Attribute
     qantity: Menge:
     add_to_cart: In den Warenkorb legen
+
+imprint:
+    title: Impressum
+    disclaimer:
+        title: Dementi
+        body: Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt erstellt, aber der Provider kann für die Richtigkeit, Vollständigkeit und Aktualität keine Gewähr. Die Nutzung der Inhalte auf dieser Website erfolgt auf eigene Gefahr des Nutzers. Diese Website enthält Links zu Websites Dritter ( "externe Links"), die in der Verantwortung des Betreibers sind. Der Anbieter hat keinerlei Einfluss auf die aktuelle und zukünftige Gestaltung und auf die Inhalte der gelinkten Seiten. Das Setzen von externen Links bedeutet nicht, dass sich der Anbieter die Inhalte hinter den Referenzen oder Links annimmt. Eine permanente inhaltliche Kontrolle über externe Links nicht zumutbar ist für den Anbieter ohne konkrete Hinweise auf Verletzungen. Im Anschluss an die Kenntnis von Rechtsverletzungen werden externe Links unverzüglich gelöscht werden.

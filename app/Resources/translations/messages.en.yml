@@ -80,3 +80,9 @@ product:
     attributes: Attributes
     qantity: Quantity:
     add_to_cart: Add to cart
+
+imprint:
+    title: Imprint
+    disclaimer:
+        title: Disclaimer
+        body: The contents of this website are created with the utmost care, but the provider cannot guarantee its accuracy, completeness or timeliness. The use of content found on this website is at the user’s own risk. This website contains links to third party websites (“external links”), which are the responsibility of the operator. The provider has no influence on the current and future design and content of linked pages. The inclusion of external links does not mean that the provider adopts the content behind the references or links. Permanent control over external links is not reasonable for the provider without concrete evidence of violations. Subsequent to the knowledge of rights violations, external links will be deleted immediately.

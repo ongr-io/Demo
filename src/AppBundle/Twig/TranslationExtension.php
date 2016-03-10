@@ -99,9 +99,9 @@ class TranslationExtension extends \Twig_Extension
                 continue;
             }
 
-            $locales[$locale] = in_array($route, ['app_homepage', 'app_search_page']) ?
-                $this->urlGenerator->generate($route, ['_locale' => $locale]) :
-                $this->ongrGenerator->generate('ongr_route', ['document' => $document, 'locale' => $locale]);
+            $locales[$locale] = strpos($route, 'ongr_route') === 0 ?
+                $this->ongrGenerator->generate('ongr_route', ['document' => $document, 'locale' => $locale]) :
+                $this->urlGenerator->generate($route, ['_locale' => $locale]);
         }
 
         return $twig->render('::inc/languages.html.twig', [
