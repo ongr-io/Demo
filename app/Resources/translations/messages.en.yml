@@ -76,6 +76,7 @@ product:
     wine_colour: Wine colour:
     wine_style: Wine style:
     more_info: More info
+    description: Description
     attributes: Attributes
     qantity: Quantity:
     add_to_cart: Add to cart
