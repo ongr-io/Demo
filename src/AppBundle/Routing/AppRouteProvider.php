@@ -95,7 +95,7 @@ class AppRouteProvider implements RouteProviderInterface
         $this->setRequestLocale($request);
 
         $routeCollection = new RouteCollection();
-        $requestPath = $request->getPathInfo();
+        $requestPath = urldecode($request->getPathInfo());
         $locale = $request->getLocale();
 
         $search = new Search();
