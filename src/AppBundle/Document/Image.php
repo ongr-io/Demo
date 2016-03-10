@@ -22,4 +22,4 @@ class Image
      * @ES\Property(type="string")
      */
     public $thumbnail;
-} 
+}

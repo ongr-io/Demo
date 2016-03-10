@@ -68,7 +68,7 @@ class ProductListExtension extends \Twig_Extension
     public function getProductAttributes($product)
     {
         try {
-            $attributes = json_decode($product->attributes, TRUE);
+            $attributes = json_decode($product->attributes, true);
             $output = [];
             foreach ($attributes as $attribute) {
                 $output[ucfirst($attribute['name'])] = implode(',', $attribute['values']);

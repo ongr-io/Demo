@@ -29,4 +29,4 @@ class Variant
      * @ES\Embedded(class="AppBundle:Image")
      */
     public $images;
-} 
+}

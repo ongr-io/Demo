@@ -7,8 +7,8 @@ use ONGR\ElasticsearchBundle\Annotation as ES;
 /**
  * @ES\Object
  */
-class MultiLanguages {
-
+class MultiLanguages
+{
     /**
      * @var Language
      * @ES\Embedded(class="AppBundle:Language\Language")
@@ -26,5 +26,4 @@ class MultiLanguages {
      * @ES\Embedded(class="AppBundle:Language\Language")
      */
     public $de;
-
-} 
+}

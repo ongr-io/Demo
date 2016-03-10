@@ -26,8 +26,9 @@ class LocaleListener
         $this->defaultLocale = $defaultLocale ?: $this->locales[0];
 
         if (!in_array($this->defaultLocale, $this->locales)) {
-            throw new \UnexpectedValueException(sprintf('The default locale ("%s") must be one of "%s".',
-                $this->defaultLocale, $locales));
+            throw new \UnexpectedValueException(
+                sprintf('The default locale ("%s") must be one of "%s".',$this->defaultLocale, $locales)
+            );
         }
 
         array_unshift($this->locales, $this->defaultLocale);
@@ -44,8 +45,7 @@ class LocaleListener
             $requestLang = $request->getLocale();
             $lang = isset($requestLang)? $requestLang : $preferredLang;
 
-            $response = new RedirectResponse($this->urlGenerator->generate('app_homepage',
-                array('_locale' => $lang)));
+            $response = new RedirectResponse($this->urlGenerator->generate('app_homepage', array('_locale' => $lang)));
             $event->setResponse($response);
 
             return;

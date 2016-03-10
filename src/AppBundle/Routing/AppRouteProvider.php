@@ -50,7 +50,7 @@ class AppRouteProvider implements RouteProviderInterface
      * @param MetadataCollector $collector
      * @param array $routeMap
      */
-    public function __construct($collector, array $routeMap = [], $locales)
+    public function __construct($collector, array $routeMap = [], $locales = [])
     {
         $this->collector = $collector;
         $this->routeMap = $routeMap;

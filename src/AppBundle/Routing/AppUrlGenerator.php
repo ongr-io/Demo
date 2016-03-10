@@ -68,7 +68,9 @@ class AppUrlGenerator extends ProviderBasedGenerator
             throw new RouteNotFoundException('Route ' . $name . ' is not a string');
         }
         if ($name != 'ongr_route') {
-            throw new RouteNotFoundException('Route ' . $name . ' is not a valid name: make sure the name is ongr_route');
+            throw new RouteNotFoundException(
+                'Route ' . $name . ' is not a valid name: make sure the name is ongr_route'
+            );
         }
     }
 
@@ -120,7 +122,6 @@ class AppUrlGenerator extends ProviderBasedGenerator
                 $referenceType,
                 $hostTokens
             );
-
         } catch (\Exception $e) {
             throw new RouteNotFoundException('Document is not correct or route cannot be generated.');
         }
