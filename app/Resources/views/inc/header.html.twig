@@ -21,6 +21,7 @@
             <div class="page-header-search">
                 {% block search_form %}
                     <form role="search" method="get" action="{{ path('app_search_page') }}">
+                        <input type="hidden" name="_locale" value="{{ app.request.locale }}" />
                         <div class="page-header-search-container">
                             <input class="page-header-search-inp" id="search-term" type="text" value="{% if search_value is defined %}{{ search_value }}{% endif %}" name="q" placeholder="{{ 'header.search'|trans }}">
                             <button type="submit" class="page-header-search-btn">

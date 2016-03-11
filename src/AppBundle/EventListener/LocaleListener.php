@@ -50,5 +50,21 @@ class LocaleListener
 
             return;
         }
+
+        $this->setRequestLocale($request);
+    }
+
+    /**
+     * Set locale to the request from request's query.
+     *
+     * @param Request $request
+     */
+    private function setRequestLocale($request)
+    {
+        $locale = $request->query->get('_locale');
+
+        if ($locale && in_array($locale, $this->locales)) {
+            $request->setLocale($locale);
+        }
     }
 }

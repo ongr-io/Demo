@@ -84,6 +84,8 @@ class TranslationExtension extends \Twig_Extension
     }
 
     /**
+     * Render language selection box.
+     *
      * @param \Twig_Environment $twig
      * @param $document
      * @return string
@@ -93,7 +95,14 @@ class TranslationExtension extends \Twig_Extension
         $defaultLocale = $this->getCurrentLocale();
 
         $locales = [];
-        $route = $this->requestStack->getCurrentRequest()->get('_route');
+        $currentRequest = $this->requestStack->getCurrentRequest();
+        $route = $currentRequest->get('_route');
+
+        $optionalParam = [];
+        if ($currentRequest->query->get('q')) {
+            $optionalParam['q'] = $currentRequest->query->get('q');
+        }
+
         foreach ($this->locales as $locale) {
             if ($locale == $defaultLocale) {
                 continue;
@@ -101,7 +110,8 @@ class TranslationExtension extends \Twig_Extension
 
             $locales[$locale] = strpos($route, 'ongr_route') === 0 ?
                 $this->ongrGenerator->generate('ongr_route', ['document' => $document, 'locale' => $locale]) :
-                $this->urlGenerator->generate($route, ['_locale' => $locale]);
+                $this->urlGenerator->generate($route,
+                    array_merge(['_locale' => $locale], $optionalParam));
         }
 
         return $twig->render('::inc/languages.html.twig', [
@@ -111,6 +121,8 @@ class TranslationExtension extends \Twig_Extension
     }
 
     /**
+     * Get translation text in field.
+     *
      * @param null|MultiLanguages $doc
      * @param null|string $locale
      * @return string
@@ -122,6 +134,8 @@ class TranslationExtension extends \Twig_Extension
     }
 
     /**
+     * Get translation URL in field.
+     *
      * @param null|MultiLanguages $doc
      * @param null|string $locale
      * @return string
@@ -140,6 +154,11 @@ class TranslationExtension extends \Twig_Extension
         return 'translation';
     }
 
+    /**
+     * Get locale from current request.
+     *
+     * @return string
+     */
     private function getCurrentLocale()
     {
         return $this->requestStack->getCurrentRequest()->getLocale();
