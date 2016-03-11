@@ -53,7 +53,7 @@ class ProductVariantExtension extends \Twig_Extension
 
         foreach ($variants as $variant) {
             $color = $variant->color->{ $locale }->text;
-            if(!in_array($color, $colors)) {
+            if (!in_array($color, $colors)) {
                 $colors[] = $color;
                 $variantColors[] = $variant->color;
             }
@@ -76,7 +76,7 @@ class ProductVariantExtension extends \Twig_Extension
 
         foreach ($variants as $variant) {
             $material = $variant->material->{ $locale }->text;
-            if(!in_array($material, $materials)) {
+            if (!in_array($material, $materials)) {
                 $materials[] = $material;
                 $variantMaterials[] = $variant->material;
             }
