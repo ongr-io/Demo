@@ -9,7 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends Controller
 {
     /**
+     *
      * @Route("/", name="app_homepage")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(Request $request)
     {
@@ -17,8 +20,12 @@ class DefaultController extends Controller
             'default/index.html.twig'
         );
     }
+
     /**
+     *
      * @Route("/imprint", name="app_imprint")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function imprintAction(Request $request)
     {
