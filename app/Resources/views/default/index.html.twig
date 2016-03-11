@@ -33,7 +33,7 @@
                             <div class="home-page-featured-small" style="background-image:url('{{ product_image(product) }}');">
                                 <div class="home-page-featured-caption">
                                     <span class="featured-caption-title">{{ product.title | translation_text }}</span>
-                                    <p class="featured-caption-description">{{ product.description | translation_text | raw }}</p>
+                                    <div class="featured-caption-description">{{ product.description | translation_text | raw }}</div>
                                     <a href="{{ product.url | translation_url }}" class="featued-caption-view">
                                         {{ 'home.buy_now'|trans }}
                                     </a>
