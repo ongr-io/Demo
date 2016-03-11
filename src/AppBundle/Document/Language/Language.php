@@ -29,6 +29,5 @@ class Language
      * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $image;
-
 }
 
