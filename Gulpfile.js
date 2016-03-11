@@ -28,6 +28,8 @@ gulp.task('scripts', function() {
             dir.bootstrapJS + 'tab.js',
             // smooth products
             dir.bower + 'smooth-products/js/smoothproducts.min.js',
+            // components
+            dir.assets + 'scripts/components/*.js',
             // services
             dir.assets + 'scripts/services/*.js',
             // pages

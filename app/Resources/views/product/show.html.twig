@@ -14,7 +14,7 @@
     <div class="product-variants">
         <span class="hidden product-id">{{ product.id }}</span>
         <div class="product-variant-colors">
-            <h4 class="list-head">Please choose color:</h4>
+            <h4 class="list-head">{{ 'product.choose_color'|trans }}</h4>
             {% for color in product_colors(product.variants) %}
                 <div class="product-variant">
                     <span class="hidden product-color-name">{{ color | translation_text }}</span>
@@ -30,7 +30,7 @@
             {% endfor %}
         </div>
         <div class="product-variant-materials">
-            <h4 class="list-head">Please choose material:</h4>
+            <h4 class="list-head">{{ 'product.choose_material'|trans }}</h4>
             {% for material in product_materials(product.variants) %}
                 <div class="product-variant">
                     <span class="hidden product-material-name">{{ material | translation_text }}</span>
@@ -66,9 +66,9 @@
         <h2 class="product-title">{{ product.title | translation_text }}</h2>
         <div class="product-info">
             <p>
-                Color: {{ product.color | translation_text }} <br/>
-                Material: {{ product.material | translation_text }} <br/>
-                Brand: {{ product.brand }} <br/>
+                {{ 'product.color'|trans }}: {{ product.color | translation_text }} <br/>
+                {{ 'product.material'|trans }}: {{ product.material | translation_text }} <br/>
+                {{ 'product.brand'|trans }}: {{ product.brand }} <br/>
             </p>
 
             {{ block('variants') }}
