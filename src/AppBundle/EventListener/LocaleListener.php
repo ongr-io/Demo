@@ -27,7 +27,7 @@ class LocaleListener
 
         if (!in_array($this->defaultLocale, $this->locales)) {
             throw new \UnexpectedValueException(
-                sprintf('The default locale ("%s") must be one of "%s".',$this->defaultLocale, $locales)
+                sprintf('The default locale ("%s") must be one of "%s".', $this->defaultLocale, $locales)
             );
         }
 
