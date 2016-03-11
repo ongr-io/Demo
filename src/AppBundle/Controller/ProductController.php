@@ -14,6 +14,9 @@ class ProductController extends Controller
      */
     public function searchAction(Request $request)
     {
+        $filter = $this->get('ongr_filter_manager.filter.search');
+        $filter->setField(sprintf("title.%s.text", $request->getLocale()));
+
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 
         return $this->render(
