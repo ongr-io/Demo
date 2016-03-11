@@ -14,8 +14,7 @@
     var Product = function() {
         var locale = appLocale;
         var selectors = {
-            //productGallery:      '.product-gallery',
-            productGalleryItem:  '#product-gallery-item',
+            productGallery:      '.product-gallery',
             smoothProducts:      '.product-gallery .product-media',
             productId:           '.product-variants .product-id',
             variants:            '.product-variants .product-variant',
@@ -24,13 +23,14 @@
         };
 
         var colorSelected, materialSelected;
+        var loader = new Ongr.Components.Loader(selectors.productGallery);
 
         var bindSmoothProducts = function(smoothProducts) {
             $(smoothProducts).smoothproducts();
         };
 
         var focusVariant = function(obj) {
-            $(obj).parent().children().removeClass('active');
+            $(obj).siblings(selectors.variants).removeClass('active');
             $(obj).addClass('active');
         };
 
@@ -40,6 +40,7 @@
             $(variants).each(function(i, variant) {
                 $(variant).unbind('click');
                 $(variant).bind('click', function() {
+                    loader.start();
                     focusVariant(this);
                     bookmarkVariantSelected(this);
                     product.getVariants(productId).then(loadVariant);
@@ -99,6 +100,7 @@
                     }
                 })
             }
+            loader.stop();
         };
 
         return {

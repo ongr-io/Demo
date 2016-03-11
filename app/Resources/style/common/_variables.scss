@@ -9,6 +9,7 @@ $color_cinnabar_approx: #e1423c;
 $color_bon_jour_approx: #e0e0e0;
 $color_alto_approx: #ddd;
 $color_gallery_approx: #eee;
+$color_mango_tango: #E57300;
 
 //fonts
 $font_0: Georgia;
@@ -17,3 +18,10 @@ $font_base: 13px;
 
 // padding
 $padding-base: 1.5em;
+
+// Loader
+$loader_color_base: $color_mango_tango;
+$loader_opacity : 0.5;
+
+// pages
+$body_background: #f9f9f9;

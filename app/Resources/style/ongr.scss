@@ -20,6 +20,7 @@
 @import "common/breadcrumb";
 @import "common/filters";
 @import "common/sorting";
+@import "common/loaders";
 
 // Pages
 @import "pages/home";
@@ -27,8 +28,6 @@
 @import "pages/product";
 @import "pages/list";
 @import "pages/content";
-
-$body_background: #f9f9f9;
 
 body {
   background: $body_background;
