@@ -87,7 +87,7 @@ class ProductListExtension extends \Twig_Extension
      * @param int $limit
      * @return mixed
      */
-    public function getTopProducts($limit=4)
+    public function getTopProducts($limit = 4)
     {
         $repository = $this->manager->getRepository('AppBundle:Product');
 

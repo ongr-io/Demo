@@ -100,18 +100,19 @@ ongr_filter_manager:
                 - app_category
             repository: 'es.manager.default.product'
     filters:
-        choice:
+        multi_choice:
             color:
                 request_field: 'c'
                 field: color
                 size: 10
-            brand:
-                request_field: 'b'
-                field: brand
-                size: 10
             material:
                 request_field: 'm'
                 field: material
+                size: 10
+        choice:
+            brand:
+                request_field: 'b'
+                field: brand
                 size: 10
         match:
             search:
