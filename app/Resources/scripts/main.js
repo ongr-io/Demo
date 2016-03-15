@@ -15,27 +15,32 @@
          */
         globals: {
             navbar: {
-                dropdown:        '.navbar-dropdown',
-                content:         '.navbar-dropdown-content'
+                dropdown:           '.navbar-dropdown',
+                content:            '.navbar-dropdown-content'
             },
             topbar: {
-                dropdown:        '.topbar-dropdown',
-                content:         '.topbar-dropdown-content'
+                dropdown:           '.topbar-dropdown',
+                content:            '.topbar-dropdown-content'
             },
             header: {
-                searchInp:       '.page-header-search-inp',
-                searchBtn:       '.page-header-search-btn',
-                cartClose:       '.page-header-cart-close',
-                dropdownContent: '.topbar-dropdown-content'
+                searchInp:          '.page-header-search-inp',
+                searchBtn:          '.page-header-search-btn',
+                cartClose:          '.page-header-cart-close',
+                dropdownContent:    '.topbar-dropdown-content'
             },
             filter: {
-                checkbox:        '.sidebar-filters-item-checkbox',
-                collapse:        '.sidebar-filter-collapse',
-                body:            '.sidebar-filters-body'
+                checkbox:           '.sidebar-filters-item-checkbox',
+                collapse:           '.sidebar-filter-collapse',
+                body:               '.sidebar-filters-body',
+                slider:          {
+                    slider:         '.sidebar-filter-slider',
+                    min:            '.sidebar-slider-min',
+                    max:            '.sidebar-slider-max'
+                }
             },
-            featuredCarousel:    '#featured-carousel',
-            footerDropdown:      '.js-footer-dropdown-trigger',
-            scrollTop:           '.scroll-top'
+            featuredCarousel:       '#featured-carousel',
+            footerDropdown:         '.js-footer-dropdown-trigger',
+            scrollTop:              '.scroll-top'
         },
 
         /**
@@ -56,6 +61,7 @@
 
             this.bindFiltersCollapse(g.filter.collapse, g.filter.body);
             this.bindFilterCheckbox(g.filter.checkbox);
+            this.bindFilterSlider(g.filter.slider.slider, [g.filter.slider.min, g.filter.slider.max]);
 
             this.bindFeaturedCarousel(g.featuredCarousel);
             this.bindFooterDropdown(g.footerDropdown);
@@ -87,8 +93,35 @@
         bindFilterCheckbox: function(checkbox) {
             $(checkbox).click(function() {
                 $(this).toggleClass('glyphicon-ok');
-                var url = window.location.origin + $(this).next().attr('href');
-                location.href = url;
+                location.href = window.location.origin + $(this).next().attr('href');
+            });
+        },
+
+        /**
+         *
+         * @param element
+         * @param label
+         */
+        bindFilterSlider: function (element, label) {
+            var slider = $(element);
+
+            slider.slider({
+                range: true,
+                min: parseFloat(slider.data('min')),
+                max: slider.data('max'),
+                values: [
+                    parseFloat($(label[0]).text().replace(',', '.')),
+                    parseFloat($(label[1]).text().replace(',', '.'))
+                ],
+                slide: function (event, ui) {
+                    $(label[0]).text(ui.values[0].toString().replace('.', ','));
+                    $(label[1]).text(ui.values[1].toString().replace('.', ','));
+                },
+                stop: function () {
+                    location.pathname = slider.data('url')
+                        .replace('price_min', parseFloat($(label[0]).text().replace(',', '.')))
+                        .replace('price_max', parseFloat($(label[1]).text().replace(',', '.')));
+                }
             });
         },
 

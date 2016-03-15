@@ -1,6 +1,10 @@
 // Vendor
 @import "./bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// jQuery UI
+@import "./bower_components/jquery-ui/themes/base/theme";
+@import "./bower_components/jquery-ui/themes/base/slider";
+
 // Utils
 @import "utils/mixins";
 @import "utils/scroll-top";
