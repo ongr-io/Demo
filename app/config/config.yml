@@ -104,6 +104,7 @@ ongr_filter_manager:
                 - brand
                 - material
                 - app_category
+                - price
             repository: 'es.manager.default.product'
     filters:
 #        field_value:
@@ -123,6 +124,11 @@ ongr_filter_manager:
                 request_field: 'm'
                 field: material
                 size: 10
+        range:
+            price:
+                request_field: 'p'
+                field: price
+                inclusive: true
         match:
             search:
                 request_field: 'q'
@@ -146,7 +152,6 @@ ongr_router:
         product: AppBundle:Product:show
         category: AppBundle:Product:list
         content: AppBundle:Content:show
-
 
 ongr_api:
     versions:

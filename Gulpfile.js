@@ -21,6 +21,11 @@ gulp.task('sass', function() {
 gulp.task('scripts', function() {
     gulp.src([
             dir.bower + 'jquery/dist/jquery.min.js',
+            // jQuery UI widgets
+            dir.bower + 'jquery-ui/ui/core.js',
+            dir.bower + 'jquery-ui/ui/widget.js',
+            dir.bower + 'jquery-ui/ui/mouse.js',
+            dir.bower + 'jquery-ui/ui/slider.js',
             // Bootstrap JS modules
             dir.bootstrapJS + 'transition.js',
             dir.bootstrapJS + 'carousel.js',

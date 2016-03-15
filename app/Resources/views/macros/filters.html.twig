@@ -1,5 +1,5 @@
 {% macro term(filter, page_route, default_route_parameters) %}
-    {% if filter|default(false) and filter.choices|length %}
+    {% if filter|default(false) and filter.choices|default({})|length %}
         {% set default_route_parameters = default_route_parameters|default({}) %}
         <div class="sidebar-filters">
             <div class="sidebar-filters-heading clearfix">
@@ -23,6 +23,31 @@
                         <a class="sidebar-filters-item all" href="{{ path(page_route, filter.resetUrlParameters|merge(default_route_parameters)) }}">{{ "filter.all"|trans }}</a>
                     {% endif %}
                 </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="sidebar-filters">
+            <div class="sidebar-filters-heading clearfix">
+                {{ ('filter.' ~ filter.name)|trans }}
+                <span class="sidebar-filter-collapse pull-right">-</span>
+            </div>
+            <div class="sidebar-filters-body">
+                {% if filter.minBounds is defined and filter.maxBounds is defined and filter.minBounds < filter.maxBounds %}
+                    <p>
+                        <span class="sidebar-slider-min">{{
+                            filter.urlParameters.p|default(false)
+                                ? filter.urlParameters.p|split(';')[0]|number_format(2, ',')
+                                : filter.minBounds|number_format(2, ',') }}</span> €
+                        - <span class="sidebar-slider-max">{{
+                            filter.urlParameters.p|default(false)
+                                ? filter.urlParameters.p|split(';')[1]|number_format(2, ',')
+                                : filter.maxBounds|number_format(2, ',') }}</span> €
+                    </p>
+                    <div class="sidebar-filters-item sidebar-filter-slider" data-min="{{
+                        filter.minBounds|number_format(2) }}" data-max="{{
+                        filter.maxBounds|number_format(2) }}" data-url="{{
+                        path(page_route, filter.getUrlParameters()|merge(default_route_parameters)|merge({'p': 'price_min;price_max'})) }}"></div>
+                {% endif %}
             </div>
         </div>
     {% endif %}

@@ -3,6 +3,7 @@ filter:
     brand: Brand
     color: Color
     material: Material
+    price: Price
     all: All
 
 topbar:
