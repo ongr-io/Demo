@@ -52,12 +52,39 @@ class ProductController extends Controller
 
     public function showAction(Request $request, Product $document)
     {
+        $locale = $request->getLocale();
+        $col = $request->query->get('color');
+        $mat = $request->query->get('material');
+        $variants = [];
+        $parameters = [
+            'product' => $document,
+            'shop_url_origin' => $this->getParameter('shop_url_origin'),
+        ];
+        if ($col !== null || $mat !== null) {
+            foreach ($document->variants as $variant) {
+                if (
+                    $variant->color->$locale->text == $col &&
+                    $variant->material->$locale->text == $mat
+                ) {
+                    $variants['variant'] = $variant;
+                    break;
+                } elseif ($variant->color->$locale->text == $col && $col !== '') {
+                    $variants['materials'][] = $variant->material->$locale->text;
+                } elseif ($variant->material->$locale->text == $mat && $mat !== '') {
+                    $variants['colors'][] = $variant->color->$locale->text;
+                }
+            }
+            $variants['selected_color'] = $col;
+            $variants['selected_material'] = $mat;
+        }
+        if (isset($variants['variant'])) {
+            $parameters['variant'] = $variants['variant'];
+        } elseif (isset($variants['colors']) || isset($variants['materials'])) {
+            $parameters['variants'] = $variants;
+        }
         return $this->render(
             'product/show.html.twig',
-            [
-                'product' => $document,
-                'shop_url_origin' => $this->getParameter('shop_url_origin'),
-            ]
+            $parameters
         );
     }
 }

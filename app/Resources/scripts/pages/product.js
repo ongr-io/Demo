@@ -15,7 +15,9 @@
         var locale = appLocale;
         var selectors = {
             images:      '.image-in-slider',
-            mainImage:   '.product-image'
+            mainImage:   '.product-image',
+            select:      '.product-variant-select',
+            form:        '#product-variant-form'
         };
 
         var bindImageSlider = function(images, mainImage) {
@@ -24,9 +26,16 @@
             });
         };
 
+        var bindVariantFormSubmition = function(select, form) {
+            $(select).on('change', function(){
+                $(form).submit();
+            });
+        };
+
         return {
             init: function() {
                 bindImageSlider(selectors.images, selectors.mainImage);
+                bindVariantFormSubmition(selectors.select, selectors.form);
             }
         };
     };

@@ -15,24 +15,24 @@
         <div class="product-variant-colors col-md-12">
             <p>{{ 'product.brand'|trans }}: {{ product.brand }}</p>
         </div>
-        <form action="{{ path('ongr_route', { 'document': product }) }}" method="get">
+        <form action="{{ path('ongr_route', { 'document': product }) }}" method="get" id="product-variant-form">
             <div class="product-variant-colors col-md-6">
                 <p>{{ 'product.choose_color'|trans }}
-                    <select name="variant-colors" id="variant-colors">
+                    <select name="color" class="product-variant-select">
                         <option value="">-</option>
                         {% for color in product_colors(product.variants) %}
-                            {% if variants is defined %}
-                                {% for var in variants %}
-                                    {% if var.color == color %}
-                                        <option class="product-variant" value="{{ color | translation_text }}"
-                                                {% if col is defined and color == col %}selected="true"{% endif %}>
-                                            {{ color | translation_text }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
+                            {% if variants['colors'] is defined %}
+                                {% if color | translation_text in variants['colors'] %}
+                                    <option class="product-variant" value="{{ color | translation_text }}">
+                                        {{ color | translation_text }}
+                                    </option>
+                                {% endif %}
                             {% else %}
                                 <option class="product-variant" value="{{ color | translation_text }}"
-                                  {% if variant is defined and color == variant.color %}selected="true"{% endif %}>
+                                  {% if (variant is defined and color | translation_text == variant.color| translation_text) or
+                                  (variants['selected_color'] is defined and variants['selected_color'] == color | translation_text)%}
+                                    selected="true"
+                                  {% endif %}>
                                     {{ color | translation_text }}
                                 </option>
                             {% endif %}
@@ -42,21 +42,21 @@
             </div>
             <div class="product-variant-materials col-md-6">
                 <p>{{ 'product.choose_material'|trans }}
-                    <select name="variant-colors" id="variant-colors">
+                    <select name="material" class="product-variant-select">
                         <option value="">-</option>
                         {% for material in product_materials(product.variants) %}
-                            {% if variants is defined %}
-                                {% for var in variants %}
-                                    {% if var.material == material %}
-                                        <option class="product-variant" value="{{ material | translation_text }}"
-                                                {% if mat is defined and material == mat %}selected="true"{% endif %}>
-                                            {{ material | translation_text }}
-                                        </option>
-                                    {% endif %}
-                                {% endfor %}
+                            {% if variants['materials'] is defined %}
+                                {% if material | translation_text in variants['materials'] %}
+                                    <option class="product-variant" value="{{ material | translation_text }}">
+                                        {{ material | translation_text }}
+                                    </option>
+                                {% endif %}
                             {% else %}
                                 <option class="product-variant" value="{{ material | translation_text }}"
-                                        {% if variant is defined and material == variant.material %}selected="true"{% endif %}>
+                                        {% if (variant is defined and material | translation_text == variant.material| translation_text) or
+                                        (variants['selected_material'] is defined and variants['selected_material'] == material | translation_text)%}
+                                            selected="true"
+                                        {% endif %}>
                                     {{ material | translation_text }}
                                 </option>
                             {% endif %}
@@ -93,6 +93,11 @@
         <form action="{{ shop_url_origin }}" method="post">
             <div>
                 <input type="hidden" name="aid" value="{{ product.id }}"/>
+                <input type="hidden" name="variant" value="
+                    {% if variant is defined %}
+                        {{ variant.key }}
+                    {% endif %}
+                "/>
                 <input type="hidden" name="fnc" value="tobasket">
                 <input type="hidden" name="referer" value="{{ product.url | translation_url }}">
             </div>
@@ -101,7 +106,7 @@
                 <input id="quantity" name="am" type="text" value="1" class="product-quantity-inp pull-left">
             </div>
             <span class="product-price">
-                {% if variant is defined and variant.price is defined %}
+                {% if variant is defined and variant.price != '' %}
                     {{ variant.price|number_format(2, ',', ' ') }} €
                 {% else %}
                     {{ product.price|number_format(2, ',', ' ') }} €
