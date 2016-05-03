@@ -80,8 +80,8 @@ product:
     attributes: Attribute
     qantity: Menge:
     add_to_cart: In den Warenkorb legen
-    choose_color: Kies kleur:
-    choose_material: Kies materiaal:
+    choose_color: Kleur:
+    choose_material: Materiaal:
     color: Kleur
     material: Materiaal
     brand: Merk

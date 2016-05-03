@@ -95,15 +95,8 @@
     }
   }
   .product-variants {
-    .list-head {
-      font-size: 1.1em;
-      font-weight: bold;
-    }
-    .product-variant-colors, .product-variant-materials {
-      display: block;
-      float: left;
-      width: 100%;
-    }
+    font-family: $font_1;
+    font-size: 14px;
     .product-variant {
       float: left;
       cursor: pointer;
@@ -115,6 +108,29 @@
       &:hover, &.active {
         .product-thumbnail {
           border: 1px solid $color_mango_tango;
+        }
+      }
+    }
+  }
+  .product-image-scroller {
+    height: 140px;
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    .slider-list {
+      list-style-type: none;
+      li {
+        display: inline-block;
+      }
+      .image-in-slider {
+        margin: 10px;
+        height: 100px;
+        width: auto;
+        border: 1px solid $color_mercury_approx;
+        max-width: 100%;
+        &:hover {
+          cursor: pointer;
+          border-color: #880000;
         }
       }
     }

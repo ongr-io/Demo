@@ -80,8 +80,8 @@ product:
     attributes: Les attributs
     qantity: Quantité:
     add_to_cart: Ajouter au panier
-    choose_color: S'il vous plaît choisir la couleur:
-    choose_material: S'il vous plaît choisir le matériel:
+    choose_color: Couleur:
+    choose_material: Matériel:
     color: Couleur
     material: Matériel
     brand: Marque
