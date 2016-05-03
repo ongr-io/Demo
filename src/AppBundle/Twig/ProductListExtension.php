@@ -52,13 +52,12 @@ class ProductListExtension extends \Twig_Extension
      */
     public function getProductImage($product)
     {
-        if (!$product->images) {
+        try {
+            $image = $product->images[0];
+            return $image;
+        } catch (\Exception $e) {
             return 'no_image';
         }
-
-        $product->images->rewind();
-        $image = $product->images->current();
-        return $image->thumbnail ?: 'no_image';
     }
 
     /**

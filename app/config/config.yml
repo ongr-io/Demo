@@ -74,7 +74,7 @@ ongr_elasticsearch:
                 filter: [lowercase]
     connections:
         default:
-            index_name: ongr
+            index_name: ongr2
             analysis:
                 analyzer:
                     - urlAnalyzer

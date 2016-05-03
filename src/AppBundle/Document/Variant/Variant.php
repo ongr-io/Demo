@@ -2,6 +2,7 @@
 
 namespace AppBundle\Document\Variant;
 
+use AppBundle\Document\Language\MultiLanguages;
 use ONGR\ElasticsearchBundle\Annotation as ES;
 
 /**
@@ -9,6 +10,11 @@ use ONGR\ElasticsearchBundle\Annotation as ES;
  */
 class Variant
 {
+    /**
+     * @var string
+     */
+    public $key;
+
     /**
      * @var MultiLanguages
      *
@@ -24,9 +30,16 @@ class Variant
     public $material;
 
     /**
-     * @var Image
+     * @var MultiLanguages
      *
-     * @ES\Embedded(class="AppBundle:Image")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
-    public $images;
+    public $description;
+
+    /**
+     * @var integer
+     *
+     * @ES\Property(type="integer")
+     */
+    public $price;
 }

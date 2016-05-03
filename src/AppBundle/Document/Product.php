@@ -37,25 +37,10 @@ class Product
      * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $brand;
-
     /**
-     * @var MultiLanguages
+     * @var array
      *
-     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
-     */
-    public $color;
-
-    /**
-     * @var MultiLanguages
-     *
-     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
-     */
-    public $material;
-
-    /**
-     * @var Image
-     *
-     * @ES\Embedded(class="AppBundle:Image", multiple=true)
+     * @ES\Property(type="string")
      */
     public $images;
 
