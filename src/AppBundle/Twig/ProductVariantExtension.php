@@ -52,6 +52,9 @@ class ProductVariantExtension extends \Twig_Extension
         $locale = $this->getCurrentLocale();
 
         foreach ($variants as $variant) {
+            if (!isset($variant->color->{ $locale }->text)) {
+                continue;
+            }
             $color = $variant->color->{ $locale }->text;
             if (!in_array($color, $colors)) {
                 $colors[] = $color;
@@ -75,6 +78,9 @@ class ProductVariantExtension extends \Twig_Extension
         $locale = $this->getCurrentLocale();
 
         foreach ($variants as $variant) {
+            if (!isset($variant->material->{ $locale }->text)) {
+                continue;
+            }
             $material = $variant->material->{ $locale }->text;
             if (!in_array($material, $materials)) {
                 $materials[] = $material;

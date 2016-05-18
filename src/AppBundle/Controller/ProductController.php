@@ -60,27 +60,34 @@ class ProductController extends Controller
             'product' => $document,
             'shop_url_origin' => $this->getParameter('shop_url_origin'),
         ];
-        if ($col !== null || $mat !== null) {
-            foreach ($document->variants as $variant) {
-                if (
-                    $variant->color->$locale->text == $col &&
-                    $variant->material->$locale->text == $mat
-                ) {
-                    $variants['variant'] = $variant;
+        foreach ($document->variants as $variant) {
+            $variants[] = $variant;
+        }
+        if ($col === null && $mat === null) {
+            $parameters['variant'] = $variants[0];
+        } else {
+            $possibleVariants = [];
+            foreach ($variants as $variant) {
+                if (isset($variant->material->$locale->text) &&
+                    $variant->material->$locale->text == $mat &&
+                    $mat != null) {
+                    $possibleVariants[] = $variant;
+                } else {
+                    $possibleVariants = $variants;
                     break;
-                } elseif ($variant->color->$locale->text == $col && $col !== '') {
-                    $variants['materials'][] = $variant->material->$locale->text;
-                } elseif ($variant->material->$locale->text == $mat && $mat !== '') {
-                    $variants['colors'][] = $variant->color->$locale->text;
                 }
             }
-            $variants['selected_color'] = $col;
-            $variants['selected_material'] = $mat;
-        }
-        if (isset($variants['variant'])) {
-            $parameters['variant'] = $variants['variant'];
-        } elseif (isset($variants['colors']) || isset($variants['materials'])) {
-            $parameters['variants'] = $variants;
+            if (count($possibleVariants) == 1) {
+                $parameters['variant'] = $possibleVariants[0];
+            } else {
+                foreach ($possibleVariants as $variant) {
+                    if ($variant->color->$locale->text == $col) {
+                        $parameters['variant'] = $variant;
+                    }
+                }
+                $parameters['variant'] = isset($parameters['variant']) ?
+                    $parameters['variant'] : $possibleVariants[0];
+            }
         }
         return $this->render(
             'product/show.html.twig',
