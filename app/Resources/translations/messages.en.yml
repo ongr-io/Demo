@@ -85,6 +85,12 @@ product:
     color: Color
     material: Material
     brand: Brand
+    dimensions: Dimensions
+    height: Height
+    length: Length
+    width: Width
+    weight: Weight
+    artnum: Art-No.:
 
 imprint:
     title: Imprint

@@ -79,12 +79,18 @@ product:
     description: Beschrijving
     attributes: Attribute
     qantity: Menge:
-    add_to_cart: In den Warenkorb legen
+    add_to_cart: In den Warenkorb
     choose_color: Kleur:
     choose_material: Materiaal:
     color: Kleur
     material: Materiaal
     brand: Merk
+    dimensions: Maße
+    height: Höhe
+    length: Länge
+    width: Breite
+    weight: Gewicht
+    artnum: Art-No.:
 
 imprint:
     title: Impressum
