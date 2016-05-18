@@ -40,7 +40,7 @@ class AppRouteProvider implements RouteProviderInterface
     private $collector;
 
     /**
-     * @var Locales
+     * @var array
      */
     private $locales;
 
@@ -49,12 +49,13 @@ class AppRouteProvider implements RouteProviderInterface
      *
      * @param MetadataCollector $collector
      * @param array $routeMap
+     * @param string $locales
      */
-    public function __construct($collector, array $routeMap = [], $locales = [])
+    public function __construct($collector, array $routeMap = [], $locales)
     {
         $this->collector = $collector;
         $this->routeMap = $routeMap;
-        $this->locales = explode('|', trim($locales));
+        $this->locales = $locales ? explode('|', trim($locales)) : [];
     }
 
     /**
