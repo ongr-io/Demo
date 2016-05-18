@@ -19,11 +19,5 @@ class MultiLanguages
      * @var Language
      * @ES\Embedded(class="AppBundle:Language\Language")
      */
-    public $fr;
-
-    /**
-     * @var Language
-     * @ES\Embedded(class="AppBundle:Language\Language")
-     */
     public $de;
 }

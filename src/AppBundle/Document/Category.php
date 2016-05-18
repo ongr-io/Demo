@@ -54,13 +54,6 @@ class Category
     public $parentKey;
 
     /**
-     * @var MultiLanguages
-     *
-     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
-     */
-    public $picture;
-
-    /**
      * @var string
      *
      * @ES\Property(type="integer")

@@ -22,11 +22,4 @@ class Language
      * @ES\Property(name="url", type="string", options={"analyzer"="urlAnalyzer"})
      */
     public $url;
-
-    /**
-     * @var string
-     *
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
-     */
-    public $image;
 }

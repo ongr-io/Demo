@@ -3,6 +3,9 @@
 namespace AppBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
+use ONGR\ElasticsearchBundle\Collection\Collection;
+use AppBundle\Document\Language\MultiLanguages;
+use AppBundle\Document\Variant\Variant;
 
 /**
  * @ES\Document()
@@ -37,6 +40,7 @@ class Product
      * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $brand;
+
     /**
      * @var array
      *
@@ -67,4 +71,9 @@ class Product
      * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $url;
+
+    public function __construct()
+    {
+        $this->variants = new Collection();
+    }
 }
