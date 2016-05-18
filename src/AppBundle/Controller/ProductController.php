@@ -53,42 +53,23 @@ class ProductController extends Controller
     public function showAction(Request $request, Product $document)
     {
         $locale = $request->getLocale();
-        $col = $request->query->get('color');
-        $mat = $request->query->get('material');
+        $var = $request->query->get('variant');
         $variants = [];
         $parameters = [
             'product' => $document,
             'shop_url_origin' => $this->getParameter('shop_url_origin'),
         ];
         foreach ($document->variants as $variant) {
-            $variants[] = $variant;
+            $variants[$variant->key] = $variant;
         }
-        if ($col === null && $mat === null) {
-            $parameters['variant'] = $variants[0];
+
+        if ($var !== null && isset($variants[$var])) {
+            $parameters['variant'] = $variants[$var];
         } else {
-            $possibleVariants = [];
-            foreach ($variants as $variant) {
-                if (isset($variant->material->$locale->text) &&
-                    $variant->material->$locale->text == $mat &&
-                    $mat != null) {
-                    $possibleVariants[] = $variant;
-                } else {
-                    $possibleVariants = $variants;
-                    break;
-                }
-            }
-            if (count($possibleVariants) == 1) {
-                $parameters['variant'] = $possibleVariants[0];
-            } else {
-                foreach ($possibleVariants as $variant) {
-                    if ($variant->color->$locale->text == $col) {
-                        $parameters['variant'] = $variant;
-                    }
-                }
-                $parameters['variant'] = isset($parameters['variant']) ?
-                    $parameters['variant'] : $possibleVariants[0];
-            }
+            $variants = array_reverse($variants);
+            $parameters['variant'] = array_pop($variants);
         }
+
         return $this->render(
             'product/show.html.twig',
             $parameters

@@ -93,6 +93,7 @@ product:
     width: Breite
     weight: Gewicht
     artnum: Art-No.:
+    variant: Wählen Sie ein Muster:
 
 imprint:
     title: Impressum

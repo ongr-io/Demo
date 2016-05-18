@@ -93,6 +93,7 @@ product:
     width: Width
     weight: Weight
     artnum: Art-No.:
+    variant: Choose a pattern:
 
 imprint:
     title: Imprint

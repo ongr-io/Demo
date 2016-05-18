@@ -17,6 +17,10 @@
             <p><strong>{{ 'product.weight'|trans }}</strong> {{ variant.weight }} kg</p>
             <p><strong>{{ 'product.artnum'|trans }}</strong> {{ variant.key }}</p>
             <p><strong>{{ 'product.brand'|trans }}:</strong> {{ product.brand }}</p>
+            <p><strong>{{ 'product.color'|trans }}:</strong> {{ variant.color | translation_text}}</p>
+            {% if variant.material[0] is defined %}
+                <p><strong>{{ 'product.material'|trans }}:</strong> {{ variant.material | translation_text}}</p>
+            {% endif %}
         </div>
         <div class="col-md-6">
             <p><strong>{{ 'product.attributes'|trans }}:</strong></p>
@@ -26,32 +30,18 @@
                {% endfor %}
            </ul>
         </div>
-        <form action="{{ path('ongr_route', { 'document': product }) }}" method="get" id="product-variant-form" class="col-md-12">
-            <div class="product-variant-colors col-md-6">
-                <p><strong>{{ 'product.choose_color'|trans }}</strong>
-                    <select name="color" class="product-variant-select">
-                        {% for color in product_colors(product.variants) %}
-                            <option class="product-variant" value="{{ color | translation_text }}"
-                              {% if variant is defined and color | translation_text == variant.color| translation_text%}
-                                selected="true"
-                              {% endif %}>{{ color | translation_text |trim}}</option>
+        <div class="variant-list col-md-12">
+            {% if product.variants | length > 1 %}
+                <p><strong>{{ 'product.variant'|trans }}</strong></p>
+                <div class="product-image-scroller">
+                    <ul class="slider-list">
+                        {% for var in product.variants %}
+                            <li><a href="{{ path('ongr_route', { 'document' : product, 'variant' : var.key }) }}"><img src="{{ var.images[0] }}" class="image-in-slider variant-select" alt=""></a></li>
                         {% endfor %}
-                    </select>
-                </p>
-            </div>
-            <div class="product-variant-materials col-md-6">
-                <p><strong>{{ 'product.choose_material'|trans }}</strong>
-                    <select name="material" class="product-variant-select">
-                        {% for material in product_materials(product.variants) %}
-                            <option class="product-variant" value="{{ material | translation_text }}"
-                                    {% if variant is defined and material | translation_text == variant.material| translation_text%}
-                                        selected="true"
-                                    {% endif %}>{{ material | translation_text }}</option>
-                        {% endfor %}
-                    </select>
-                </p>
-            </div>
-        </form>
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
 
@@ -116,13 +106,9 @@
                 <img src="{% if variant.images[0] is defined %}{{ variant.images[0] }}{% else %}{{ product.images[0] }}{% endif %}" class="product-image" rel="1" alt="">
                 <div class="product-image-scroller">
                     <ul class="slider-list">
-                        {% if variant.images[0] is defined %}
+                        {% if variant.images[0] is defined and variant.images|length>1%}
                             {% for image in variant.images %}
-                                <li ><img src="{{ image }}" class="image-in-slider" alt=""></li>
-                            {% endfor %}
-                        {% else %}
-                            {% for image in product.images %}
-                                <li ><img src="{{ image }}" class="image-in-slider" alt=""></li>
+                                <li ><img src="{{ image }}" class="image-in-slider image-select" alt=""></li>
                             {% endfor %}
                         {% endif %}
                     </ul>

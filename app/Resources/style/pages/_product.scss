@@ -113,12 +113,14 @@
     }
   }
   .product-image-scroller {
+    margin-bottom: 10px;
     height: 140px;
     width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     .slider-list {
       list-style-type: none;
+      white-space: nowrap;
       li {
         display: inline-block;
       }

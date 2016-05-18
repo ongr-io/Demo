@@ -14,10 +14,8 @@
     var Product = function() {
         var locale = appLocale;
         var selectors = {
-            images:      '.image-in-slider',
+            images:      '.image-select',
             mainImage:   '.product-image',
-            select:      '.product-variant-select',
-            form:        '#product-variant-form'
         };
 
         var bindImageSlider = function(images, mainImage) {
@@ -25,17 +23,9 @@
                 $(mainImage).attr('src', $(this).attr('src'));
             });
         };
-
-        var bindVariantFormSubmition = function(select, form) {
-            $(select).on('change', function(){
-                $(form).submit();
-            });
-        };
-
         return {
             init: function() {
                 bindImageSlider(selectors.images, selectors.mainImage);
-                bindVariantFormSubmition(selectors.select, selectors.form);
             }
         };
     };
