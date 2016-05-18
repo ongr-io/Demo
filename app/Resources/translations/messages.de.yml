@@ -8,6 +8,8 @@ filter:
     price_desc: Preis absteigend
     title_asc: Titel aufsteigend
     title_desc: Titel absteigend
+    price: Preis
+    more: Mehr als
 
 topbar:
     my_account: Mein Konto

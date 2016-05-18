@@ -8,6 +8,8 @@ filter:
     price_desc: Price descending
     title_asc: Title ascending
     title_desc: Title descending
+    price: Price
+    more: More than
 
 topbar:
     my_account: My Account

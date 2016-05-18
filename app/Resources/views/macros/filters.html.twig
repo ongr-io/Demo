@@ -23,3 +23,52 @@
         </div>
     {% endif %}
 {% endmacro %}
+
+{% macro range(filter, page_route, default_route_parameters) %}
+    {% if filter|default(false) %}
+        {% set default_route_parameters = default_route_parameters|default({}) %}
+        <div class="sidebar-filters">
+            <div class="sidebar-filters-heading clearfix">
+                {{ ('filter.' ~ filter.name)|trans }}
+                <span class="sidebar-filter-collapse pull-right">-</span>
+            </div>
+            <div class="sidebar-filters-body">
+                <div class="sidebar-filters-group clearfix">
+                        <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "0;10"%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"0;10"})) }}"
+                           class="sidebar-filters-item ">
+                            0 - 10 €</a>
+                        <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "10;25"%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"10;25"})) }}"
+                           class="sidebar-filters-item ">
+                            10 - 25 €</a>
+                        <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "25;50"%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"25;50"})) }}"
+                           class="sidebar-filters-item ">
+                            25 - 50 €</a>
+                        <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "50;100"%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"50;100"})) }}"
+                           class="sidebar-filters-item ">
+                            50 - 100 €</a>
+                        <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "100;"~filter.getMaxBounds()%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"100;"~filter.getMaxBounds()})) }}"
+                           class="sidebar-filters-item ">
+                            {{ ('filter.more')|trans }} 100 €</a>
+                    {% if filter.state.active %}
+                        <a class="sidebar-filters-item all" href="{{ path(page_route, filter.resetUrlParameters|merge(default_route_parameters)) }}">{{ "filter.all"|trans }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}

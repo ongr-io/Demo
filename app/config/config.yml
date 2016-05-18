@@ -93,6 +93,7 @@ ongr_filter_manager:
             filters:
                 - search
                 - pager
+                - price
                 - sorting
                 - color
                 - brand
@@ -131,6 +132,11 @@ ongr_filter_manager:
                     - { label: filter.price_desc, field: price, order: desc }
                     - { label: filter.title_asc, field: title }
                     - { label: filter.title_desc, field: title, order: desc }
+        range:
+            price:
+                request_field: 'price'
+                field: price
+                inclusive: true
 
 ongr_router:
     seo_routes:
