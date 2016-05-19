@@ -52,13 +52,36 @@
 
     {% block product_list %}
         <div class="row">
+            {% set colors = []%}
+            {% for choice in filter_manager.filters.color.getChoices() %}
+                {% if choice.isActive() %}
+                    {% set colors = colors|merge([choice.getLabel()]) %}
+                {% endif %}
+            {% endfor %}
             {% for product in filter_manager.getResult %}
+                {% if colors is not empty %}
+                    {% set variant = '' %}
+                    {% for var in product.variants %}
+                        {% if var.color is defined and var.color|translation_text in colors %}
+                            {% set variant = var %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
                 <div class="col-md-3 col-sm-6 col-xs-6 product-container">
                     <div class="thumbnail product-thumbnail">
-                        {% set product_url = path('ongr_route', { 'document': product }) %}
+                        {% if variant is defined %}
+                            {% set product_url = path('ongr_route', { 'document': product, 'variant': variant.key }) %}
+                        {% else %}
+                            {% set product_url = path('ongr_route', { 'document': product }) %}
+                        {% endif %}
                         <div class="product-image-container">
                             <a href="{{ product_url }}">
-                                <img src="{{ product_image(product) }}" class="product-image" alt="Product image"/>
+                                {% if variant is defined and variant.images[0] is defined%}
+                                    <img src="{{ variant.images[0] }}" class="product-image" alt="Product image"/>
+                                {% else %}
+                                    <img src="{{ product_image(product) }}" class="product-image" alt="Product image"/>
+                                {% endif %}
                             </a>
                         </div>
                     </div>
