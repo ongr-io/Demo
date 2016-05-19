@@ -28,9 +28,9 @@ class Variant
     /**
      * @var MultiLanguages
      *
-     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages", multiple=true)
      */
-    public $material;
+    public $materials;
 
     /**
      * @var MultiLanguages
@@ -45,6 +45,13 @@ class Variant
      * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $description;
+
+    /**
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
+     */
+    public $people;
 
     /**
      * @var integer
@@ -91,5 +98,6 @@ class Variant
     public function __construct()
     {
         $this->attributes = new Collection();
+        $this->materials = new Collection();
     }
 }

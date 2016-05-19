@@ -17,18 +17,28 @@
             <p><strong>{{ 'product.weight'|trans }}</strong> {{ variant.weight }} kg</p>
             <p><strong>{{ 'product.artnum'|trans }}</strong> {{ variant.key }}</p>
             <p><strong>{{ 'product.brand'|trans }}:</strong> {{ product.brand }}</p>
-            <p><strong>{{ 'product.color'|trans }}:</strong> {{ variant.color | translation_text}}</p>
-            {% if variant.material[0] is defined %}
-                <p><strong>{{ 'product.material'|trans }}:</strong> {{ variant.material | translation_text}}</p>
+            {% if variant.color.en.text is defined %}
+                <p><strong>{{ 'product.color'|trans }}:</strong> {{ variant.color | translation_text}}</p>
+            {% endif %}
+            {% if variant.materials[0] is defined %}
+                <p><strong>{{ 'product.material'|trans }}:</strong></p>
+                <ul>
+                {% for material in variant.materials %}
+                     <li>{{ material | translation_text}}</li>
+                {% endfor %}
+                </ul>
             {% endif %}
         </div>
         <div class="col-md-6">
+            {% if variant.people.en is defined %}
+                <p><strong>{{ 'product.people'|trans }}:</strong> {{ variant.people|translation_text }}</p>
+            {% endif %}
             <p><strong>{{ 'product.attributes'|trans }}:</strong></p>
-           <ul>
+            <ul>
                {% for attribute in variant.attributes %}
                     <li>{{ attribute | translation_text | raw}}</li>
                {% endfor %}
-           </ul>
+            </ul>
         </div>
         <div class="variant-list col-md-12">
             {% if product.variants | length > 1 %}

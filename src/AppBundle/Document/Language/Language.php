@@ -12,7 +12,15 @@ class Language
     /**
      * @var string
      *
-     * @ES\Property(type="string")
+     * @ES\Property(
+     *     type="string",
+     *     options={
+     *        "fields"={
+     *          "raw"={"type"="string", "index"="not_analyzed"},
+     *          "text"={"type"="string"}
+     *        }
+     *     }
+     *   )
      */
     public $text;
 

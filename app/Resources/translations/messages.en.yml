@@ -10,6 +10,7 @@ filter:
     title_desc: Title descending
     price: Price
     more: More than
+    people: People
 
 topbar:
     my_account: My Account
@@ -85,7 +86,7 @@ product:
     choose_color: Color:
     choose_material: Material:
     color: Color
-    material: Material
+    material: Materials
     brand: Brand
     dimensions: Dimensions
     height: Height
@@ -94,6 +95,7 @@ product:
     weight: Weight
     artnum: Art-No.:
     variant: Choose a pattern:
+    people: Recomended
 
 imprint:
     title: Imprint

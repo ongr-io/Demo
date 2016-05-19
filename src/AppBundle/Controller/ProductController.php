@@ -34,10 +34,13 @@ class ProductController extends Controller
     public function listAction(Request $request, Category $document)
     {
         $colorFilter = $this->get('ongr_filter_manager.filter.color');
-        $colorFilter->setField(sprintf('variants.color.%s.text', $request->getLocale()));
+        $colorFilter->setField(sprintf('variants.color.%s.text.raw', $request->getLocale()));
 
         $materialFilter = $this->get('ongr_filter_manager.filter.material');
-        $materialFilter->setField(sprintf('variants.material.%s.text', $request->getLocale()));
+        $materialFilter->setField(sprintf('variants.materials.%s.text', $request->getLocale()));
+
+        $peopleFilter = $this->get('ongr_filter_manager.filter.people');
+        $peopleFilter->setField(sprintf('variants.people.%s.text.raw', $request->getLocale()));
 
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 

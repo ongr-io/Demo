@@ -10,6 +10,7 @@ filter:
     title_desc: Titel absteigend
     price: Preis
     more: Mehr als
+    people: Menschen
 
 topbar:
     my_account: Mein Konto
@@ -85,7 +86,8 @@ product:
     choose_color: Kleur:
     choose_material: Materiaal:
     color: Kleur
-    material: Materiaal
+    material: Materialien
+    people: Empfehlen
     brand: Merk
     dimensions: Maße
     height: Höhe

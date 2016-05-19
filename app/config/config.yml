@@ -97,6 +97,7 @@ ongr_filter_manager:
                 - sorting
                 - color
                 - brand
+                - people
                 - material
                 - app_category
             repository: 'es.manager.default.product'
@@ -106,6 +107,11 @@ ongr_filter_manager:
                 request_field: 'c'
                 field: color
                 size: 10
+                relations:
+                    search:
+                        include:
+                            - people
+
             material:
                 request_field: 'm'
                 field: material
@@ -115,6 +121,14 @@ ongr_filter_manager:
                 request_field: 'b'
                 field: brand
                 size: 10
+            people:
+                request_field: 'p'
+                field: variants.people
+                size: 10
+                relations:
+                    search:
+                        include:
+                            - color
         match:
             search:
                 request_field: 'q'
