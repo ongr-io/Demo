@@ -23,7 +23,9 @@
         {% set filter = filters.sorting %}
         <div class="list-sorting-container clearfix">
             <div class="dropdown pull-right">
-                <a data-toggle="dropdown" href="#" class="btn btn-sm btn-default">
+                <a data-toggle="dropdown" href="{% for choice in filter.choices %}
+                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ path('ongr_route', choice.urlParameters) }}{% endif %}
+                    {% endfor %}" class="btn btn-sm btn-default">
                     {{ ('filter.' ~ filter.name)|trans }}
                     {% for choice in filter.choices %}
                         {% if choice.active or ((not filter.state.active) and choice.default) %} {{ choice.label|trans }}{% endif %}
@@ -34,7 +36,7 @@
                     {% for choice in filter.choices %}
                         {% if not (choice.active or (choice.default and not filter.state.active)) %}
                             {#<li><a href="{{ path(block('page_route'), choice.getUrlParameters()) }}">{{ choice.label }}</a></li>#}
-                            <li><a href="#">{{ choice.label|trans }}</a></li>
+                            <li><a href="{{ path('ongr_route', choice.urlParameters) }}">{{ choice.label|trans }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

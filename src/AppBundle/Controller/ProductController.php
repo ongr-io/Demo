@@ -33,15 +33,7 @@ class ProductController extends Controller
      */
     public function listAction(Request $request, Category $document)
     {
-        $colorFilter = $this->get('ongr_filter_manager.filter.color');
-        $colorFilter->setField(sprintf('variants.color.%s.text.raw', $request->getLocale()));
-
-        $materialFilter = $this->get('ongr_filter_manager.filter.material');
-        $materialFilter->setField(sprintf('variants.materials.%s.text', $request->getLocale()));
-
-        $peopleFilter = $this->get('ongr_filter_manager.filter.people');
-        $peopleFilter->setField(sprintf('variants.people.%s.text.raw', $request->getLocale()));
-
+        $this->setLocalesToFields($request);
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 
         return $this->render(
@@ -77,5 +69,32 @@ class ProductController extends Controller
             'product/show.html.twig',
             $parameters
         );
+    }
+
+    /**
+     * Sets correct fields by locale to the filter manager
+     * @param Request $request
+     */
+    private function setLocalesToFields($request)
+    {
+        $colorFilter = $this->get('ongr_filter_manager.filter.color');
+        $colorFilter->setField(sprintf('variants.color.%s.text.raw', $request->getLocale()));
+
+        $materialFilter = $this->get('ongr_filter_manager.filter.material');
+        $materialFilter->setField(sprintf('variants.materials.%s.text', $request->getLocale()));
+
+        $peopleFilter = $this->get('ongr_filter_manager.filter.people');
+        $peopleFilter->setField(sprintf('variants.people.%s.text.raw', $request->getLocale()));
+
+        $sortChoices = $this->getParameter('sort_choices');
+        $fieldName = sprintf('title.%s.text.raw', $request->getLocale());
+        foreach ($sortChoices as $key => $choice) {
+            if (preg_match('/^title\..*$/', $choice['field'])) {
+                $sortChoices[$key]['field'] = $fieldName;
+                $sortChoices[$key]['fields'][0]['field'] = $fieldName;
+            }
+        }
+        $sort = $this->get('ongr_filter_manager.filter.sorting');
+        $sort->setChoices($sortChoices);
     }
 }

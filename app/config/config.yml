@@ -167,3 +167,13 @@ ongr_api:
                     variants: true
                 category:
                     repository: es.manager.default.category
+app:
+    filters:
+        sort:
+            sorting:
+                request_field: 'sort'
+                choices:
+                    - { label: filter.price_asc, field: price, default: true }
+                    - { label: filter.price_desc, field: price, order: desc }
+                    - { label: filter.title_asc, field: title.%locale%.text.raw }
+                    - { label: filter.title_desc, field: title.%locale%.text.raw, order: desc }
