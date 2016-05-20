@@ -1,3 +1,4 @@
+{% set products = top_products(4) %}
 {% extends 'base.html.twig' %}
 
 {% block content_wrapper %}
@@ -12,65 +13,34 @@
                             <li data-target="#featured-carousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner" role="listbox">
-                            <div class="item active">
-                                <div class="featured-carousel-img" style="background-image:url({{ asset('images/servierbrett_set_plato_atmo_01.jpg') }});">
-                                    <a class="featured-carousel-view" href="/en/Culinary-Food-Drink/Dishes-Cutlery/Party-Foods-Sushi/Bread-Board-Set-Plato.html">{{ 'home.view_more'|trans }}</a>
+                            {% for index, product in products %}
+                                <div class="item {% if index == 0 %}active{% endif %}">
+                                    <div class="featured-carousel-img" style="background-image:url({{ product_image(product) }});">
+                                        <a class="featured-carousel-view" href="{{ product.url | translation_url }}">
+                                            {{ 'home.view_more'|trans }}
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="item">
-                                <div class="featured-carousel-img" style="background-image:url({{ asset('images/kochloeffelhalter_clipper_1.jpg') }});">
-                                    <a href="en/Culinary-Food-Drink/Kitchen-Aids/Spoon-Holder/Pot-Utensil-Clipper.html" class="featured-carousel-view">{{ 'home.view_more'|trans }}</a>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="featured-carousel-img" style="background-image:url({{ asset('images/tablett_set_spun_lazy_susan_atmo_01.jpg') }});">
-                                    <a href="/en/Culinary-Food-Drink/Dishes-Cutlery/Party-Foods-Sushi/Tray-Set-Spun-Lazy-Susan.html" class="featured-carousel-view">{{ 'home.view_more'|trans }}</a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
-                        <div class="home-page-featured-small" style="background-image:url('{{ asset('images/wanduhr_cage_hell_02.jpg') }}');">
-                            <div class="home-page-featured-caption">
-                                <span class="featured-caption-title">"Marqués De Castilla" Blanco, 2013</span>
-                                <p class="featured-caption-description">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                                <a href="/en/Better-Living/Living-Accessories/Clocks/Cage-Clock.html" class="featued-caption-view">{{ 'home.buy_now'|trans }}</a>
+                    {% for product in products %}
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
+                            <div class="home-page-featured-small" style="background-image:url('{{ product_image(product) }}');">
+                                <div class="home-page-featured-caption">
+                                    <span class="featured-caption-title">{{ product.title | translation_text }}</span>
+                                    <div class="featured-caption-description">{{ product.description | translation_text | raw }}</div>
+                                    <a href="{{ product.url | translation_url }}" class="featued-caption-view">
+                                        {{ 'home.buy_now'|trans }}
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
-                        <div class="home-page-featured-small" style="background-image:url('{{ asset('images/mp30_pfeffer-od.salzmhle_minimill_2_1.jpg') }}');">
-                            <div class="home-page-featured-caption">
-                                <span class="featured-caption-title">"Marqués De Castilla" Blanco, 2013</span>
-                                <p class="featured-caption-description">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                                <a href="/en/Culinary-Food-Drink/Kitchen-Aids/Pepper-Mill/Pepper-or-Salt-Mill-Minimill.html" class="featued-caption-view">{{ 'home.buy_now'|trans }}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
-                        <div class="home-page-featured-small" style="background-image:url({{ asset('images/pfeffer-oder-salzmuehle-willi_3.jpg') }});">
-                            <div class="home-page-featured-caption">
-                                <span class="featured-caption-title">"Marqués De Castilla" Blanco, 2013</span>
-                                <p class="featured-caption-description">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                                <a href="/en/Culinary-Food-Drink/Kitchen-Aids/Pepper-Mill/Pepper-or-Salt-Mill-Willi.html" class="featued-caption-view">{{ 'home.buy_now'|trans }}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
-                        <div class="home-page-featured-small" style="background-image:url({{ asset('images/umbra_330639-560_conceal_atmo_01.jpg') }});">
-                            <div class="home-page-featured-caption">
-                                <span class="featured-caption-title">"Marqués De Castilla" Blanco, 2013</span>
-                                <p class="featured-caption-description">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-                                <a href="/en/Better-Living/Furniture/Shelves/Shelf-Conceal-large.html" class="featued-caption-view">{{ 'home.buy_now'|trans }}</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

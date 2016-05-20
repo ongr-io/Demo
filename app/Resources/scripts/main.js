@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-(function($) {
+(function($, Ongr) {
     var ONGR = {
         /**
          * Global DOM selectors
@@ -61,6 +61,9 @@
             this.bindFooterDropdown(g.footerDropdown);
 
             this.bindScrollTop(g.scrollTop);
+
+            var product = Ongr.Pages.Product();
+            product.init();
         },
 
         /**
@@ -203,5 +206,4 @@
     };
 
     var App = Object.create(ONGR); App.init();
-})(jQuery);
-
+})(jQuery, Ongr);

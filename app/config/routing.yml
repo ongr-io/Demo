@@ -1,6 +1,21 @@
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    prefix:   /{_locale}
+    requirements:
+        _locale: %app_locales%
+    defaults:
+        _locale: %locale%
+
+ongr_api_main_route:
+    resource: .
+    type: ongr_api
+    prefix: api/
+    options:
+        expose: true
 
 ongr_api_main_route:
     resource: .

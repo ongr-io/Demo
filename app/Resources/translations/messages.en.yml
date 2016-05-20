@@ -4,6 +4,13 @@ filter:
     color: Color
     material: Material
     all: All
+    price_asc: Price ascending
+    price_desc: Price descending
+    title_asc: Title ascending
+    title_desc: Title descending
+    price: Price
+    more: More than
+    people: People
 
 topbar:
     my_account: My Account
@@ -18,10 +25,10 @@ topbar:
     sign_in_or_register: <a href="%sign_in%">Sign in</a> or <a href="%register%">Register</a>
 
 language:
-    english: English
-    german: Deutsch
-    spanish: Español
-    french: Français
+    en: English
+    de: Deutsch
+    es: Español
+    fr: Français
 
 currency:
     dollar: Dollar
@@ -42,6 +49,8 @@ header:
 
 footer:
     copyright: © %year% Powered by ONGR™. All Rights Reserved.
+    demo_only: This shop is for demo purposes only. If you want to buy these products - please go to <a href="http://www.design-3000.de">www.design-3000.de</a>
+    imprint: Imprint
     info:
         title: Information
         specials: Specials
@@ -70,6 +79,26 @@ product:
     wine_colour: Wine colour:
     wine_style: Wine style:
     more_info: More info
+    description: Description
     attributes: Attributes
     qantity: Quantity:
     add_to_cart: Add to cart
+    choose_color: Color:
+    choose_material: Material:
+    color: Color
+    material: Materials
+    brand: Brand
+    dimensions: Dimensions
+    height: Height
+    length: Length
+    width: Width
+    weight: Weight
+    artnum: Art-No.:
+    variant: Choose a pattern:
+    people: Recomended
+
+imprint:
+    title: Imprint
+    disclaimer:
+        title: Disclaimer
+        body: The contents of this website are created with the utmost care, but the provider cannot guarantee its accuracy, completeness or timeliness. The use of content found on this website is at the user’s own risk. This website contains links to third party websites (“external links”), which are the responsibility of the operator. The provider has no influence on the current and future design and content of linked pages. The inclusion of external links does not mean that the provider adopts the content behind the references or links. Permanent control over external links is not reasonable for the provider without concrete evidence of violations. Subsequent to the knowledge of rights violations, external links will be deleted immediately.

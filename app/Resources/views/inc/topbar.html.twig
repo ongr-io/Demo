@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            {#<div class="col-xs-7 col-sm-4 col-md-4 col-lg-4">#}
+            <div class="col-xs-7 col-sm-4 col-md-4 col-lg-4">
                 {#<div class="topbar-additional topbar-currency topbar-dropdown pull-right">#}
                     {#<span class="topbar-additional-selected">{{ 'currency.dollar'|trans }}</span>#}
                     {#<div class="topbar-dropdown-content">#}
@@ -54,6 +54,13 @@
                         {#</ul>#}
                     {#</div>#}
                 {#</div>#}
+                {% if product is defined %}
+                    {{ render_translation_selection(product) }}
+                {% elseif category is defined %}
+                    {{ render_translation_selection(category) }}
+                {% else %}
+                    {{ render_translation_selection() }}
+                {% endif %}
                 {#<div class="topbar-additional topbar-language topbar-dropdown pull-right">#}
                     {#<span class="topbar-additional-selected">#}
                         {#<img src="{{ asset('images/english.jpg') }}" alt="language" width="16" height="11"/>#}
@@ -82,7 +89,7 @@
                         {#</ul>#}
                     {#</div>#}
                 {#</div>#}
-            {#</div>#}
+            </div>
         </div>
     </div>
 </header>

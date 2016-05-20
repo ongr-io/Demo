@@ -11,8 +11,10 @@
 {#{% endblock %}#}
 
 {% block sidebar %}
+    {{ filter_macros.range(filters.price, 'ongr_route', {'document':category}) }}
     {{ filter_macros.term(filters.color, 'ongr_route', {'document':category}) }}
     {{ filter_macros.term(filters.brand, 'ongr_route', {'document':category}) }}
+    {{ filter_macros.term(filters.people, 'ongr_route', {'document':category}) }}
     {{ filter_macros.term(filters.material, 'ongr_route', {'document':category}) }}
 {% endblock %}
 
@@ -21,10 +23,18 @@
         {% set filter = filters.sorting %}
         <div class="list-sorting-container clearfix">
             <div class="dropdown pull-right">
-                <a data-toggle="dropdown" href="#" class="btn btn-sm btn-default">
+                <a data-toggle="dropdown" href="{% for choice in filter.choices %}
+                        {% if choice.active or ((not filter.state.active) and choice.default) %}
+                             {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                 {{ path('ongr_route', choice.urlParameters) }}
+                             {% else %}
+                                 {{ path(app.request.attributes.get('_route'), choice.urlParameters) }}
+                             {% endif %}
+                        {% endif %}
+                    {% endfor %}" class="btn btn-sm btn-default">
                     {{ ('filter.' ~ filter.name)|trans }}
                     {% for choice in filter.choices %}
-                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ choice.label }}{% endif %}
+                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ choice.label|trans }}{% endif %}
                     {% endfor %}
                     <span class="caret"></span>
                 </a>
@@ -32,7 +42,12 @@
                     {% for choice in filter.choices %}
                         {% if not (choice.active or (choice.default and not filter.state.active)) %}
                             {#<li><a href="{{ path(block('page_route'), choice.getUrlParameters()) }}">{{ choice.label }}</a></li>#}
-                            <li><a href="#">{{ choice.label }}</a></li>
+                            <li><a href="
+                                {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                    {{ path('ongr_route', choice.urlParameters) }}
+                                {% else %}
+                                    {{ path(app.request.attributes.get('_route'), choice.urlParameters) }}
+                                {% endif %}">{{ choice.label|trans }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -44,35 +59,81 @@
 {% block content %}
 
     {% block list_header %}
-        <h2 class="list-page-header-title">{% block list_title %}{{ category.title }}{% endblock %}</h2>
+        <h2 class="list-page-header-title">{% block list_title %}{{ category.title|translation_text }}{% endblock %}</h2>
     {% endblock %}
 
     {{ block('sorting') }}
 
     {% block product_list %}
         <div class="row">
+            {% set colors = []%}
+            {% set people = ''%}
+            {% for choice in filter_manager.filters.color.getChoices() %}
+                {% if choice.isActive() %}
+                    {% set colors = colors|merge([choice.getLabel()]) %}
+                {% endif %}
+            {% endfor %}
+            {% for choice in filter_manager.filters.people.getChoices() %}
+                {% if choice.isActive() %}
+                    {% set people = choice.getLabel() %}
+                {% endif %}
+            {% endfor %}
             {% for product in filter_manager.getResult %}
-                <div class="col-md-3 col-sm-6 col-xs-6 product-container">
-                    <div class="thumbnail product-thumbnail">
-                        {% set product_url = path('ongr_route', { 'document': product }) %}
-                        <div class="product-image-container">
-                            <a href="{{ product_url }}">
-                                <img src="{{ product_image(product) }}" class="product-image" alt="Product image"/>
-                            </a>
+                {% set variant = '' %}
+                {% if colors is not empty and people is not empty %}
+                    {% for var in product.variants %}
+                        {% if var.color.en.text is defined and var.color|translation_text in colors and var.people|translation_text == people%}
+                            {% set variant = var %}
+                        {% endif %}
+                        {% if variant is empty %} {% set variant = 'no-variant' %} {% endif %}
+                    {% endfor %}
+                {% elseif colors is not empty %}
+                    {% for var in product.variants %}
+                        {% if var.color.en.text is defined and var.color|translation_text in colors %}
+                            {% set variant = var %}
+                        {% endif %}
+                    {% endfor %}
+                {% elseif people is not empty %}
+                    {% for var in product.variants %}
+                        {% if var.people|translation_text == people %}
+                            {% set variant = var %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                {% if variant != 'no-variant' %}
+                    <div class="col-md-3 col-sm-6 col-xs-6 product-container">
+                        <div class="thumbnail product-thumbnail">
+                            {% if variant is defined and variant is not empty %}
+                                {% set product_url = path('ongr_route', { 'document': product, 'variant': variant.key }) %}
+                            {% else %}
+                                {% set product_url = path('ongr_route', { 'document': product }) %}
+                            {% endif %}
+                            <div class="product-image-container">
+                                <a href="{{ product_url }}">
+                                    {% if variant is defined and variant.images[0] is defined%}
+                                        <img src="{{ variant.images[0] }}" class="product-image" alt="Product image"/>
+                                    {% else %}
+                                        <img src="{{ product_image(product) }}" class="product-image" alt="Product image"/>
+                                    {% endif %}
+                                </a>
+                            </div>
                         </div>
+                        <h5 class="product-title">
+                            <a class="product-link" href="{{ product_url }}">{{ product.title|translation_text }}</a>
+                        </h5>
+                        <strong class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</strong>
                     </div>
-                    <h5 class="product-title">
-                        <a class="product-link" href="{{ product_url }}">{{ product.title }}</a>
-                    </h5>
-                    <strong class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</strong>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     {% endblock %}
 
     {% if filters.pager is defined %}
         <div class="list-pagination clearfix">
-            <div class="pull-right">{{ ongr_paginate(filters.pager.pager, 'ongr_route', { 'document': category }) }}</div>
+            {% set parameters = {'document': category} %}
+            {% set parameters = parameters|merge(filters.pager.getUrlParameters()) %}
+            <div class="pull-right">{{ ongr_paginate(filters.pager.pager, 'ongr_route', parameters) }}</div>
         </div>
     {% endif %}
 

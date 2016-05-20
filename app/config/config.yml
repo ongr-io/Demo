@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    app_locales: en|de
 
 framework:
     #esi:             ~
@@ -50,12 +51,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -79,7 +74,7 @@ ongr_elasticsearch:
                 filter: [lowercase]
     connections:
         default:
-            index_name: ongr
+            index_name: ongr2
             analysis:
                 analyzer:
                     - urlAnalyzer
@@ -96,33 +91,44 @@ ongr_filter_manager:
     managers:
         product_list:
             filters:
-#                - category
                 - search
                 - pager
+                - price
                 - sorting
                 - color
                 - brand
+                - people
                 - material
                 - app_category
             repository: 'es.manager.default.product'
     filters:
-#        field_value:
-#            category:
-#                field: category_keys
-#                value: "mens-clothing"
-        choice:
+        multi_choice:
             color:
                 request_field: 'c'
                 field: color
                 size: 10
-            brand:
-                request_field: 'b'
-                field: brand
-                size: 10
+                relations:
+                    search:
+                        include:
+                            - people
+
             material:
                 request_field: 'm'
                 field: material
                 size: 10
+        choice:
+            brand:
+                request_field: 'b'
+                field: brand
+                size: 10
+            people:
+                request_field: 'p'
+                field: variants.people
+                size: 10
+                relations:
+                    search:
+                        include:
+                            - color
         match:
             search:
                 request_field: 'q'
@@ -136,10 +142,15 @@ ongr_filter_manager:
             sorting:
                 request_field: 'sort'
                 choices:
-                    - { label: Price ascending, field: price, default: true }
-                    - { label: Price descending, field: price, order: desc }
-                    - { label: Title ascending, field: title }
-                    - { label: Title descending, field: title, order: desc }
+                    - { label: filter.price_asc, field: price, default: true }
+                    - { label: filter.price_desc, field: price, order: desc }
+                    - { label: filter.title_asc, field: title }
+                    - { label: filter.title_desc, field: title, order: desc }
+        range:
+            price:
+                request_field: 'price'
+                field: price
+                inclusive: true
 
 ongr_router:
     seo_routes:
@@ -147,12 +158,22 @@ ongr_router:
         category: AppBundle:Product:list
         content: AppBundle:Content:show
 
-
 ongr_api:
     versions:
         v3:
             endpoints:
                 product:
                     repository: es.manager.default.product
+                    variants: true
                 category:
                     repository: es.manager.default.category
+app:
+    filters:
+        sort:
+            sorting:
+                request_field: 'sort'
+                choices:
+                    - { label: filter.price_asc, field: price, default: true }
+                    - { label: filter.price_desc, field: price, order: desc }
+                    - { label: filter.title_asc, field: title.%locale%.text.raw }
+                    - { label: filter.title_desc, field: title.%locale%.text.raw, order: desc }

@@ -3,15 +3,15 @@
 namespace AppBundle\Document;
 
 use ONGR\ElasticsearchBundle\Annotation as ES;
-use ONGR\RouterBundle\Document\SeoAwareTrait;
+use ONGR\ElasticsearchBundle\Collection\Collection;
+use AppBundle\Document\Language\MultiLanguages;
+use AppBundle\Document\Variant\Variant;
 
 /**
  * @ES\Document()
  */
 class Product
 {
-    use SeoAwareTrait;
-
     /**
      * @ES\Id()
      */
@@ -23,12 +23,16 @@ class Product
     public $key;
 
     /**
-     * @ES\Property(type="string")
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $title;
 
     /**
-     * @ES\Property(type="string")
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
      */
     public $description;
 
@@ -38,17 +42,9 @@ class Product
     public $brand;
 
     /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
-     */
-    public $color;
-
-    /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
-     */
-    public $material;
-
-    /**
-     * @ES\Property(type="string", options={"index"="not_analyzed"})
+     * @var array
+     *
+     * @ES\Property(type="string")
      */
     public $images;
 
@@ -61,4 +57,23 @@ class Product
      * @ES\Property(type="string", options={"index"="not_analyzed"})
      */
     public $categoryKeys;
+
+    /**
+     * @var Variant
+     *
+     * @ES\Embedded(class="AppBundle:Variant\Variant", multiple=true)
+     */
+    public $variants;
+
+    /**
+     * @var MultiLanguages
+     *
+     * @ES\Embedded(class="AppBundle:Language\MultiLanguages")
+     */
+    public $url;
+
+    public function __construct()
+    {
+        $this->variants = new Collection();
+    }
 }
