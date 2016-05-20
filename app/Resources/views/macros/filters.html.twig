@@ -9,14 +9,22 @@
             <div class="sidebar-filters-body">
                 <div class="sidebar-filters-group clearfix">
                     {% for choice in filter.choices %}
-                        <span class="sidebar-filters-item-checkbox glyphicon{% if choice.active %} glyphicon-ok{% endif %}"></span>
-                        <a href="{{ path(page_route, choice.getUrlParameters()|merge(default_route_parameters)) }}"
+                        <a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                     {{ path(page_route, choice.getUrlParameters()|merge(default_route_parameters)) }}
+                                 {% else %}
+                                     {{ path(app.request.attributes.get('_route'), choice.getUrlParameters()|merge(default_route_parameters)) }}
+                                 {% endif %}"
                            class="sidebar-filters-item {% if choice.active %} active{% endif %}">
+                            <span class="sidebar-filters-item-checkbox glyphicon{% if choice.active %} glyphicon-ok{% endif %}"></span>
                             {{ choice.label }}
                             <span class="sidebar-filters-amount">({{ choice.count }})</span></a>
                     {% endfor %}
                     {% if filter.state.active %}
-                        <a class="sidebar-filters-item all" href="{{ path(page_route, filter.resetUrlParameters|merge(default_route_parameters)) }}">{{ "filter.all"|trans }}</a>
+                        <a class="sidebar-filters-item all" href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                     {{ path(page_route, filter.resetUrlParameters()|merge(default_route_parameters)) }}
+                                 {% else %}
+                                     {{ path(app.request.attributes.get('_route'), filter.resetUrlParameters()|merge(default_route_parameters)) }}
+                                 {% endif %}">{{ "filter.all"|trans }}</a>
                     {% endif %}
                 </div>
             </div>
@@ -34,36 +42,12 @@
             </div>
             <div class="sidebar-filters-body">
                 <div class="sidebar-filters-group clearfix">
-                        <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "0;10"%}
-                           glyphicon-ok{% endif %} glyphicon"></span>
-                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"0;10"})) }}"
-                           class="sidebar-filters-item ">
-                            0 - 10 €</a>
-                        <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "10;25"%}
-                           glyphicon-ok{% endif %} glyphicon"></span>
-                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"10;25"})) }}"
-                           class="sidebar-filters-item ">
-                            10 - 25 €</a>
-                        <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "25;50"%}
-                           glyphicon-ok{% endif %} glyphicon"></span>
-                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"25;50"})) }}"
-                           class="sidebar-filters-item ">
-                            25 - 50 €</a>
-                        <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "50;100"%}
-                           glyphicon-ok{% endif %} glyphicon"></span>
-                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"50;100"})) }}"
-                           class="sidebar-filters-item ">
-                            50 - 100 €</a>
-                        <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == "100;"~filter.getMaxBounds()%}
-                           glyphicon-ok{% endif %} glyphicon"></span>
-                        <a href="{{ path(page_route, filter.getUrlParameters()|merge({"price":"100;"~filter.getMaxBounds()})) }}"
-                           class="sidebar-filters-item ">
-                            {{ ('filter.more')|trans }} 100 €</a>
+                    {% import _self as macros %}
+                    {{ macros.price_select(filter, page_route, "0;10", "0 - 10") }}
+                    {{ macros.price_select(filter, page_route, "10;25", "10 - 25") }}
+                    {{ macros.price_select(filter, page_route, "25;50", "25 - 50") }}
+                    {{ macros.price_select(filter, page_route, "50;100", "50 - 100") }}
+                    {{ macros.price_select(filter, page_route, "100;10000", "filter.more"|trans~" 100") }}
                     {% if filter.state.active %}
                         <a class="sidebar-filters-item all" href="{{ path(page_route, filter.resetUrlParameters|merge(default_route_parameters)) }}">{{ "filter.all"|trans }}</a>
                     {% endif %}
@@ -71,4 +55,17 @@
             </div>
         </div>
     {% endif %}
+{% endmacro %}
+
+{% macro price_select(filter, page_route, url_param, range) %}
+    <span class="sidebar-filters-item-checkbox
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == url_param%}
+                           glyphicon-ok{% endif %} glyphicon"></span>
+    <a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+             {{ path(page_route, filter.getUrlParameters()|merge({"price":url_param})) }}
+         {% else %}
+             {{ path(app.request.attributes.get('_route'), filter.getUrlParameters()|merge({"price":url_param})) }}
+         {% endif %}"
+       class="sidebar-filters-item ">
+        {{ range }} €</a>
 {% endmacro %}

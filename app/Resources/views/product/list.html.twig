@@ -24,7 +24,13 @@
         <div class="list-sorting-container clearfix">
             <div class="dropdown pull-right">
                 <a data-toggle="dropdown" href="{% for choice in filter.choices %}
-                        {% if choice.active or ((not filter.state.active) and choice.default) %} {{ path('ongr_route', choice.urlParameters) }}{% endif %}
+                        {% if choice.active or ((not filter.state.active) and choice.default) %}
+                             {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                 {{ path('ongr_route', choice.urlParameters) }}
+                             {% else %}
+                                 {{ path(app.request.attributes.get('_route'), choice.urlParameters) }}
+                             {% endif %}
+                        {% endif %}
                     {% endfor %}" class="btn btn-sm btn-default">
                     {{ ('filter.' ~ filter.name)|trans }}
                     {% for choice in filter.choices %}
@@ -36,7 +42,12 @@
                     {% for choice in filter.choices %}
                         {% if not (choice.active or (choice.default and not filter.state.active)) %}
                             {#<li><a href="{{ path(block('page_route'), choice.getUrlParameters()) }}">{{ choice.label }}</a></li>#}
-                            <li><a href="{{ path('ongr_route', choice.urlParameters) }}">{{ choice.label|trans }}</a></li>
+                            <li><a href="
+                                {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                    {{ path('ongr_route', choice.urlParameters) }}
+                                {% else %}
+                                    {{ path(app.request.attributes.get('_route'), choice.urlParameters) }}
+                                {% endif %}">{{ choice.label|trans }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

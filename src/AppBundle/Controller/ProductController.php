@@ -14,9 +14,7 @@ class ProductController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $filter = $this->get('ongr_filter_manager.filter.search');
-        $filter->setField(sprintf("title.%s.text", $request->getLocale()));
-
+        $this->setLocalesToFields($request);
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 
         return $this->render(
@@ -77,6 +75,9 @@ class ProductController extends Controller
      */
     private function setLocalesToFields($request)
     {
+        $filter = $this->get('ongr_filter_manager.filter.search');
+        $filter->setField(sprintf("title.%s.text", $request->getLocale()));
+
         $colorFilter = $this->get('ongr_filter_manager.filter.color');
         $colorFilter->setField(sprintf('variants.color.%s.text.raw', $request->getLocale()));
 
