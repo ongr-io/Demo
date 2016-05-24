@@ -52,6 +52,29 @@
                     {% endfor %}
                 </ul>
             </div>
+            <div class="dropdown pull-right">
+                <a data-toggle="dropdown" href="" class="btn btn-sm btn-default">
+                    Count per page
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li class="text-center"><a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                    {{ path('ongr_route', app.request.query.all|merge({'cpp':12, 'document': category})) }}
+                                {% else %}
+                                    {{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'cpp':12, 'document': category})) }}
+                                {% endif %}">12</a></li>
+                    <li class="text-center"><a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                    {{ path('ongr_route', app.request.query.all|merge({'cpp':20, 'document': category})) }}
+                                {% else %}
+                                    {{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'cpp':20, 'document': category})) }}
+                                {% endif %}">20</a></li>
+                    <li class="text-center"><a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                    {{ path('ongr_route', app.request.query.all|merge({'cpp':28, 'document': category})) }}
+                                {% else %}
+                                    {{ path(app.request.attributes.get('_route'), app.request.query.all|merge({'cpp':28, 'document': category})) }}
+                                {% endif %}">28</a></li>
+                </ul>
+            </div>
         </div>
     {% endif %}
 {% endblock %}

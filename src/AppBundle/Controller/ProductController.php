@@ -87,6 +87,11 @@ class ProductController extends Controller
         $peopleFilter = $this->get('ongr_filter_manager.filter.people');
         $peopleFilter->setField(sprintf('variants.people.%s.text.raw', $request->getLocale()));
 
+        if ($request->query->get('cpp') != null && $request->query->get('cpp') != '') {
+            $pager = $this->get('ongr_filter_manager.filter.pager');
+            $pager->setCountPerPage($request->query->get('cpp'));
+        }
+
         $sortChoices = $this->getParameter('sort_choices');
         $fieldName = sprintf('title.%s.text.raw', $request->getLocale());
         foreach ($sortChoices as $key => $choice) {
