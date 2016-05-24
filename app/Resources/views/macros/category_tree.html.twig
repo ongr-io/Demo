@@ -4,7 +4,7 @@
         {% for category in categories %}
             <li{% if category.children is defined %} class="navbar-dropdown"{% endif %}>
                 <a href="{{ path('ongr_route', {'document': category.document}) }}">
-                    {{- category.document.title -}}
+                    {{- category.document.title|translation_text -}}
                 </a>
                 {% if category.children is defined %}
                     {{ macros.category_tree(category.children) }}

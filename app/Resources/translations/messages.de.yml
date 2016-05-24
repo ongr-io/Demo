@@ -1,0 +1,104 @@
+filter:
+    sorting: In den Warenkorb legen:
+    brand: Marke
+    color: Farbe
+    material: Stoff
+    all: Alle
+    price_asc: Preis aufsteigend
+    price_desc: Preis absteigend
+    title_asc: Titel aufsteigend
+    title_desc: Titel absteigend
+    price: Preis
+    more: Mehr als
+    people: Menschen
+
+topbar:
+    my_account: Mein Konto
+    my_orders: Meine befehle
+    my_credit_slips: Meine kredit rutscht
+    my_addresses: Meine adressen
+    my_personal_info: Meine persönlichen daten
+    my_vouchers: Meine gutscheine
+    my_wishlist: Meine Wunschliste (%count%)
+    no_products: Keine produkte
+    watch_list: Merkliste (%count%)
+    sign_in_or_register: <a href="%sign_in%">Anmelden</a> oder <a href="%register%">Neu Registrieren</a>
+
+language:
+    en: English
+    de: Deutsch
+    es: Español
+    fr: Français
+
+currency:
+    dollar: Dollar
+    euro: Euro
+    pound: Pfund
+
+header:
+    cart:
+        title: Karte:
+        empty: (leer)
+        tax: Steuer:
+        total: Gesamt:
+        checkout: Auschecken
+        show_cart: Warenkorb anzeigen
+    search: Suche...
+    toggle_navigation: Knebel-navigation
+    menu: Menü
+
+footer:
+    copyright: © %year% Unterstützt von ONGR™. Alle Rechte Vorbehalten.
+    demo_only: Dieser shop ist ausschließlich für Demozwecke . Wenn sie diese Produkte kaufen wollen - gehen sie bitte auf <a href="http://www.design-3000.de">www.design-3000.de</a>
+    imprint: Impressum
+    info:
+        title: Informationen
+        specials: Angebote
+        new_products: Neue produkte
+        top_sellers: Meist gekauft
+        our_stores: Unsere läden
+        contact_us: Kontaktiere uns
+    useful_links:
+        title: Nützliche links
+        about_us: Über uns
+        delivery: Lieferung
+        legal_notice: Impressum
+        secure_payment: Sichere Bezahlung
+        terms_conditions: Terms & Bedingungen
+    latest_tweets: Neueste Tweets
+    facebook: Facebook
+
+home:
+    view_more: Mehr sehen
+    buy_now: Kaufe jetzt!
+
+product:
+    manufacturer: Hersteller:
+    grape: Traube:
+    alcohol_level: Promille:
+    wine_colour: Weinfarbe:
+    wine_style: Wein-Stil:
+    more_info: Mehr informationen
+    description: Beschrijving
+    attributes: Attribute
+    qantity: Menge:
+    add_to_cart: In den Warenkorb
+    choose_color: Kleur:
+    choose_material: Materiaal:
+    color: Kleur
+    material: Materialien
+    people: Empfehlen
+    brand: Merk
+    dimensions: Maße
+    height: Höhe
+    length: Länge
+    width: Breite
+    weight: Gewicht
+    artnum: Art-No.:
+    variant: Wählen Sie ein Muster:
+
+imprint:
+    title: Impressum
+    disclaimer:
+        title: Dementi
+        body: Die Inhalte dieser Website werden mit größtmöglicher Sorgfalt erstellt, aber der Provider kann für die Richtigkeit, Vollständigkeit und Aktualität keine Gewähr. Die Nutzung der Inhalte auf dieser Website erfolgt auf eigene Gefahr des Nutzers. Diese Website enthält Links zu Websites Dritter ( "externe Links"), die in der Verantwortung des Betreibers sind. Der Anbieter hat keinerlei Einfluss auf die aktuelle und zukünftige Gestaltung und auf die Inhalte der gelinkten Seiten. Das Setzen von externen Links bedeutet nicht, dass sich der Anbieter die Inhalte hinter den Referenzen oder Links annimmt. Eine permanente inhaltliche Kontrolle über externe Links nicht zumutbar ist für den Anbieter ohne konkrete Hinweise auf Verletzungen. Im Anschluss an die Kenntnis von Rechtsverletzungen werden externe Links unverzüglich gelöscht werden.

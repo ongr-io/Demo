@@ -1,0 +1,18 @@
+<div class="topbar-additional topbar-language topbar-dropdown pull-right">
+                    <span class="topbar-additional-selected">
+                        <img src="{{ asset("images/locales/#{ defaultLocale }.jpg") }}" alt="language" width="16" height="11"/>
+                        <span class="hidden-xs">{{ "language.#{ defaultLocale }"|trans }}</span>
+                    </span>
+    <div class="topbar-dropdown-content">
+        <ul class="topbar-additional-list">
+            {% for locale, url in locales %}
+                <li class="topbar-additional-list-item">
+                    <a href="{{ url }}">
+                        <img src="{{ asset("images/locales/#{ locale }.jpg") }}" alt="language" width="16" height="11"/>
+                        {{ "language.#{ locale }"|trans }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

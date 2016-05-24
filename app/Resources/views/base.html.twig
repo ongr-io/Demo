@@ -54,6 +54,11 @@
     </div>
     {% include "::inc/footer.html.twig" %}
     {% block javascripts %}
+        <script>
+            var appLocale = "{{ app.request.locale }}";
+        </script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
         <script src="{{ asset('js/ongr.js') }}"></script>
     {% endblock %}
     <script>

@@ -61,8 +61,7 @@
                         <p class="footer-bottom-copyright">{{ 'footer.copyright'|trans({'%year%': 'now'|date('Y')}) }}</p>
                     </div>
                     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 footer-bottom-right">
-                        <p class="footer-bottom-copyright">This shop is for demo purposes only.
-                            If you want to buy these products - please go to <a href="http://www.design-3000.de">www.design-3000.de</a> | <a data-toggle="modal" href="{{ path('app_imprint') }}">Imprint </a></p>
+                        <p class="footer-bottom-copyright">{{ 'footer.demo_only'|trans|raw }} | <a data-toggle="modal" href="{{ path('app_imprint') }}">{{ 'footer.imprint'|trans }}</a></p>
                     </div>
                 </div>
             </div>

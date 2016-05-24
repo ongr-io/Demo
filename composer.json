@@ -24,7 +24,9 @@
         "ongr/elasticsearch-bundle": "~1.0",
         "ongr/filter-manager-bundle": "~1.0",
         "ongr/router-bundle": "~1.0",
-        "ongr/api-bundle": "~1.0"
+        "ongr/currency-exchange-bundle": "dev-master",
+        "ongr/api-bundle": "~1.0",
+        "friendsofsymfony/jsrouting-bundle": "~1.6.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

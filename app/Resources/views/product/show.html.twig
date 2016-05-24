@@ -3,61 +3,140 @@
 {% import '::macros/breadcrumbs.html.twig' as breadcrumbs_macros %}
 
 {% block title %}
-    {{ product.title }} - {{ parent() }}
+    {{ product.title | translation_text }} - {{ parent() }}
 {% endblock %}
 
 {% block canonical_meta %}
     <link rel="canonical" href="{{ path('ongr_route', { 'document' : product }) }}">
 {% endblock %}
 
-{% block about %}
-    <h2 class="product-title">{{ product.title }}</h2>
-    <div class="product-more-info">
+{% block variants %}
+    <div class="product-variants">
+        <div class="col-md-6">
+            <p><strong>{{ 'product.dimensions'|trans }}:</strong> {{ 'product.height'|trans }}: {{ variant.height }} cm, {{ 'product.length'|trans }}: {{ variant.length }} cm, {{ 'product.width'|trans }}: {{ variant.width }} cm</p>
+            <p><strong>{{ 'product.weight'|trans }}</strong> {{ variant.weight }} kg</p>
+            <p><strong>{{ 'product.artnum'|trans }}</strong> {{ variant.key }}</p>
+            <p><strong>{{ 'product.brand'|trans }}:</strong> {{ product.brand }}</p>
+            {% if variant.color.en.text is defined %}
+                <p><strong>{{ 'product.color'|trans }}:</strong> {{ variant.color | translation_text}}</p>
+            {% endif %}
+            {% if variant.materials[0] is defined %}
+                <p><strong>{{ 'product.material'|trans }}:</strong></p>
+                <ul>
+                {% for material in variant.materials %}
+                     <li>{{ material | translation_text}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="col-md-6">
+            {% if variant.people.en is defined %}
+                <p><strong>{{ 'product.people'|trans }}:</strong> {{ variant.people|translation_text }}</p>
+            {% endif %}
+            <p><strong>{{ 'product.attributes'|trans }}:</strong></p>
+            <ul>
+               {% for attribute in variant.attributes %}
+                    <li>{{ attribute | translation_text | raw}}</li>
+               {% endfor %}
+            </ul>
+        </div>
+        <div class="variant-list col-md-12">
+            {% if product.variants | length > 1 %}
+                <p><strong>{{ 'product.variant'|trans }}</strong></p>
+                <div class="product-image-scroller">
+                    <ul class="slider-list">
+                        {% for var in product.variants %}
+                            <li><a href="{{ path('ongr_route', { 'document' : product, 'variant' : var.key }) }}"><img src="{{ var.images[0] }}" class="image-in-slider variant-select" alt=""></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block product_details %}
+    <div class="product-details product-more-info">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.more_info'|trans }}</a></li>
+            <li role="presentation" class="active"><a href="#more_info" aria-controls="more_info" role="tab" data-toggle="tab">{{ 'product.description'|trans }}</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="more_info">
-
-                <p>
-                    {{ product.description|raw }}
-                </p>
-
-                <p>
-                    Color: {{ product.color }} <br/>
-                    Material: {{ product.material }} <br/>
-                    Brand: {{ product.brand }} <br/>
-                </p>
+                {% if  variant.description.en.text is defined and variant.description.en.text != ''%}
+                    {{ variant.description | translation_text | raw }}
+                {% else %}
+                    {{ product.description | translation_text | raw }}
+                {% endif %}
             </div>
         </div>
     </div>
+{% endblock %}
 
-    {#<div class="alert alert-success" role="alert">Successfully added to cart</div>#}
+{% block product_content %}
+    <div class="col-sm-7 col-md-7 col-lg-6">
+        <h2 class="product-title">{{ product.title | translation_text }}</h2>
+        {{ block('product_details') }}
+        <div class="product-info">
+            {{ block('variants') }}
+        </div>
+        {#<div class="alert alert-success" role="alert">Successfully added to cart</div>#}
 
-    <form action="{{ shop_url_origin }}" method="post">
-        <div>
-            <input type="hidden" name="aid" value="{{ product.id }}"/>
-            <input type="hidden" name="fnc" value="tobasket">
-            <input type="hidden" name="referer" value="{{ product.url }}">
-        </div>
-        <div class="product-quantity-container clearfix">
-            <label for="quantity" class="product-quantity-title pull-left">{{ 'product.qantity'|trans }}</label>
-            <input id="quantity" name="am" type="text" value="1" class="product-quantity-inp pull-left">
-        </div>
-        <span class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</span>
-        <button class="product-add-to-cart">{{ 'product.add_to_cart'|trans }}</button>
-    </form>
+        <form action="{{ shop_url_origin }}" method="post">
+            <div>
+                <input type="hidden" name="aid" value="{{ product.id }}"/>
+                <input type="hidden" name="variant" value="
+                    {% if variant is defined %}
+                        {{ variant.key }}
+                    {% endif %}
+                "/>
+                <input type="hidden" name="fnc" value="tobasket">
+                <input type="hidden" name="referer" value="{{ product.url | translation_url }}">
+            </div>
+            <div class="product-quantity-container clearfix">
+                <label for="quantity" class="product-quantity-title pull-left"><strong>{{ 'product.qantity'|trans }}</strong></label>
+                <input id="quantity" name="am" type="text" value="1" class="product-quantity-inp pull-left">
+            </div>
+            <span class="product-price">
+                {% if variant is defined and variant.price is defined and variant.price != 0 %}
+                    {% if app.request.query.get('curr') == 'dollar' %}
+                        {{ variant.price|ongr_price(2, 'USD') }}
+                    {% else %}
+                        {{ variant.price|ongr_price(2) }}
+                    {% endif %}
+                {% else %}
+                    {% if app.request.query.get('curr') == 'dollar' %}
+                        {{ product.price|ongr_price(2, 'USD') }}
+                    {% else %}
+                        {{ product.price|ongr_price(2) }}
+                    {% endif %}
+                {% endif %}
+            </span>
+            <button class="product-add-to-cart">{{ 'product.add_to_cart'|trans }}</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block content %}
     {{ parent() }}
     <div class="product-page">
         <div class="row">
-            <div class="col-sm-5 col-md-5 col-lg-6">
-                <img class="product-image" src="{{ product_image(product) }}"/>
+            <div class="main-product-image col-sm-5 col-md-5 col-lg-6">
+                <img src="{% if variant.images[0] is defined %}{{ variant.images[0] }}{% else %}{{ product.images[0] }}{% endif %}" class="product-image" rel="1" alt="">
+                <div class="product-image-scroller">
+                    <ul class="slider-list">
+                        {% if variant.images[0] is defined and variant.images|length>1%}
+                            {% for image in variant.images %}
+                                <li ><img src="{{ image }}" class="image-in-slider image-select" alt=""></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <div class="col-sm-7 col-md-7 col-lg-6">
-                {{ block('about') }}
+            {{ block('product_content') }}
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+
             </div>
         </div>
     </div>

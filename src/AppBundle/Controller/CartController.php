@@ -18,7 +18,7 @@ class CartController extends Controller
 
         $products = [];
 
-        $cart = json_decode($request->cookies->get('ongr_basket'), TRUE);
+        $cart = json_decode($request->cookies->get('ongr_basket'), true);
 
         if (isset($cart['items'])) {
             foreach ($cart['items'] as &$item) {

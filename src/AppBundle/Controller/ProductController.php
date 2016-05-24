@@ -14,6 +14,7 @@ class ProductController extends Controller
      */
     public function searchAction(Request $request)
     {
+        $this->setLocalesToFields($request);
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 
         return $this->render(
@@ -30,6 +31,7 @@ class ProductController extends Controller
      */
     public function listAction(Request $request, Category $document)
     {
+        $this->setLocalesToFields($request);
         $filterManager = $this->get('ongr_filter_manager.product_list')->handleRequest($request);
 
         return $this->render(
@@ -41,14 +43,64 @@ class ProductController extends Controller
         );
     }
 
-    public function showAction(Product $document)
+    public function showAction(Request $request, Product $document)
     {
+        $locale = $request->getLocale();
+        $var = $request->query->get('variant');
+        $variants = [];
+        $parameters = [
+            'product' => $document,
+            'shop_url_origin' => $this->getParameter('shop_url_origin'),
+        ];
+        foreach ($document->variants as $variant) {
+            $variants[$variant->key] = $variant;
+        }
+
+        if ($var !== null && isset($variants[$var])) {
+            $parameters['variant'] = $variants[$var];
+        } else {
+            $variants = array_reverse($variants);
+            $parameters['variant'] = array_pop($variants);
+        }
+
         return $this->render(
             'product/show.html.twig',
-            [
-                'product' => $document,
-                'shop_url_origin' => $this->getParameter('shop_url_origin'),
-            ]
+            $parameters
         );
+    }
+
+    /**
+     * Sets correct fields by locale to the filter manager
+     * @param Request $request
+     */
+    private function setLocalesToFields($request)
+    {
+        $filter = $this->get('ongr_filter_manager.filter.search');
+        $filter->setField(sprintf("title.%s.text", $request->getLocale()));
+
+        $colorFilter = $this->get('ongr_filter_manager.filter.color');
+        $colorFilter->setField(sprintf('variants.color.%s.text.raw', $request->getLocale()));
+
+        $materialFilter = $this->get('ongr_filter_manager.filter.material');
+        $materialFilter->setField(sprintf('variants.materials.%s.text', $request->getLocale()));
+
+        $peopleFilter = $this->get('ongr_filter_manager.filter.people');
+        $peopleFilter->setField(sprintf('variants.people.%s.text.raw', $request->getLocale()));
+
+        if ($request->query->get('cpp') != null && $request->query->get('cpp') != '') {
+            $pager = $this->get('ongr_filter_manager.filter.pager');
+            $pager->setCountPerPage($request->query->get('cpp'));
+        }
+
+        $sortChoices = $this->getParameter('sort_choices');
+        $fieldName = sprintf('title.%s.text.raw', $request->getLocale());
+        foreach ($sortChoices as $key => $choice) {
+            if (preg_match('/^title\..*$/', $choice['field'])) {
+                $sortChoices[$key]['field'] = $fieldName;
+                $sortChoices[$key]['fields'][0]['field'] = $fieldName;
+            }
+        }
+        $sort = $this->get('ongr_filter_manager.filter.sorting');
+        $sort->setChoices($sortChoices);
     }
 }

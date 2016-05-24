@@ -118,7 +118,10 @@
         line-height: 30px;
         text-align: center;
         padding: 0 15px;
-        max-width: 110px;
+        max-width: 200px;
+        left: 0;
+        right: 0;
+        margin: auto;
         &:hover {
           background: #e17365;
         }

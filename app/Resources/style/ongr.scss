@@ -1,6 +1,12 @@
 // Vendor
 @import "./bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Libs
+@import "libs/smoothproducts";
+
+// variables
+@import "common/variables";
+
 // Utils
 @import "utils/mixins";
 @import "utils/scroll-top";
@@ -14,6 +20,7 @@
 @import "common/breadcrumb";
 @import "common/filters";
 @import "common/sorting";
+@import "common/loaders";
 
 // Pages
 @import "pages/home";
@@ -22,10 +29,9 @@
 @import "pages/list";
 @import "pages/content";
 
-$body_background: #f9f9f9;
-
 body {
   background: $body_background;
+  font-size: $font_base;
 }
 
 a, button {

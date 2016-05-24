@@ -13,6 +13,7 @@ namespace AppBundle\Twig;
 
 use AppBundle\Document\Product;
 use ONGR\ElasticsearchBundle\Service\Manager;
+use ONGR\ElasticsearchDSL\Search;
 
 class ProductListExtension extends \Twig_Extension
 {
@@ -37,6 +38,7 @@ class ProductListExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
+            new \Twig_Function('top_products', [$this, 'getTopProducts']),
             new \Twig_Function('product_image', [$this, 'getProductImage']),
             new \Twig_Function('product_attributes', [$this, 'getProductAttributes']),
         ];
@@ -67,7 +69,7 @@ class ProductListExtension extends \Twig_Extension
     public function getProductAttributes($product)
     {
         try {
-            $attributes = json_decode($product->attributes, TRUE);
+            $attributes = json_decode($product->attributes, true);
             $output = [];
             foreach ($attributes as $attribute) {
                 $output[ucfirst($attribute['name'])] = implode(',', $attribute['values']);
@@ -77,6 +79,30 @@ class ProductListExtension extends \Twig_Extension
         } catch (\Exception $e) {
             return null;
         }
+    }
+
+    /**
+     * Returns top products.
+     * @return mixed
+     */
+    public function getTopProducts()
+    {
+        $repository = $this->manager->getRepository('AppBundle:Product');
+        $names = [
+            'Bread Board Set Plato',
+            'Chip & Dip Set Chipster',
+            'Salad Bowl Savore',
+            'Cage Clock',
+            'Tray Set Spun Lazy Susan',
+            'Photo Display U Love',
+            'Candleholder Nordic Light 4 arms'
+        ];
+        $products =[];
+        foreach ($names as $name) {
+            $products[] = $repository->findOneBy(['title.en.text' => $name]);
+        }
+
+        return $products;
     }
 
     /**

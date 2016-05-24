@@ -5,8 +5,6 @@ parameters:
         - 90f486b7e452df425.39048049
         - d8c486b581bf3ea84.34074175
 
-#    parameter_name: value
-
 services:
     # TODO: change service id after fix in filter manager
     ongr_filter_manager.filter.app_category:
@@ -33,3 +31,48 @@ services:
         arguments: ["@es.manager"]
         tags:
             - { name: twig.extension }
+
+    app.currency_extension:
+            class: AppBundle\Twig\CurrencyExtension
+            arguments: ["@ongr_currency_exchange.currency_exchange_service"]
+            tags:
+                - { name: twig.extension }
+
+    app.translation_extension:
+        class: AppBundle\Twig\TranslationExtension
+        arguments: [%app_locales%]
+        calls:
+            - [ setRequestStack, ["@request_stack"]]
+            - [ setUrlGenerator, ["@router"]]
+            - [ setOngrGenerator, ["@app.url_generator"]]
+        tags:
+            - { name: twig.extension }
+
+    app.product_variant_extension:
+        class: AppBundle\Twig\ProductVariantExtension
+        calls:
+            - [ setRequestStack, ["@request_stack"]]
+        tags:
+            - { name: twig.extension }
+
+    app.locale_listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: ["@router", %app_locales%, %locale%]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    ongr_router.elasticsearch_route_provider:
+        class: AppBundle\Routing\AppRouteProvider
+        arguments: ["@es.metadata_collector", %ongr_router.seo_routes%, %app_locales%]
+
+    app.url_generator:
+        class: AppBundle\Routing\AppUrlGenerator
+        arguments: ["@ongr_router.elasticsearch_route_provider", "@?logger"]
+        calls:
+            - [ setCollector, [ "@es.metadata_collector" ] ]
+
+    ongr_router.dynamic_router:
+            class: Symfony\Cmf\Component\Routing\DynamicRouter
+            arguments: ["@router.request_context", "@ongr_router.nested_matcher", "@app.url_generator", '', "@event_dispatcher", "@ongr_router.elasticsearch_route_provider"]
+            tags:
+                - { name: router, priority: -100 }
