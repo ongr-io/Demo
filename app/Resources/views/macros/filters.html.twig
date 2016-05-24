@@ -43,11 +43,24 @@
             <div class="sidebar-filters-body">
                 <div class="sidebar-filters-group clearfix">
                     {% import _self as macros %}
-                    {{ macros.price_select(filter, page_route, "0;10", "0 - 10") }}
-                    {{ macros.price_select(filter, page_route, "10;25", "10 - 25") }}
-                    {{ macros.price_select(filter, page_route, "25;50", "25 - 50") }}
-                    {{ macros.price_select(filter, page_route, "50;100", "50 - 100") }}
-                    {{ macros.price_select(filter, page_route, "100;10000", "filter.more"|trans~" 100") }}
+                    {% if app.request.query.get('curr') == 'dollar' %}
+                        {% set interval = "0;"~10|ongr_price_conversion('USD', 'EUR') %}
+                        {{ macros.price_select(filter, page_route, interval, "0 - 10 $", interval)}}
+                        {% set interval = 10|ongr_price_conversion('USD', 'EUR')~";"~25|ongr_price_conversion('USD', 'EUR') %}
+                        {{ macros.price_select(filter, page_route, interval, "10 - 25 $", interval) }}
+                        {% set interval = 25|ongr_price_conversion('USD', 'EUR')~";"~50|ongr_price_conversion('USD', 'EUR') %}
+                        {{ macros.price_select(filter, page_route, interval, "25 - 50 $", interval) }}
+                        {% set interval = 50|ongr_price_conversion('USD', 'EUR')~";"~100|ongr_price_conversion('USD', 'EUR') %}
+                        {{ macros.price_select(filter, page_route, interval, "50 - 100 $", interval) }}
+                        {% set interval = 100|ongr_price_conversion('USD', 'EUR')~";10000" %}
+                        {{ macros.price_select(filter, page_route, interval, "filter.more"|trans~" 100 $", interval) }}
+                    {% else %}
+                        {{ macros.price_select(filter, page_route, "0;10", "0 - 10 €", "0;10") }}
+                        {{ macros.price_select(filter, page_route, "10;25", "10 - 25 €", "10;25") }}
+                        {{ macros.price_select(filter, page_route, "25;50", "25 - 50 €", "25;50") }}
+                        {{ macros.price_select(filter, page_route, "50;100", "50 - 100 €", "50;100") }}
+                        {{ macros.price_select(filter, page_route, "100;10000", "filter.more"|trans~" 100 €", "100;1000") }}
+                    {% endif %}
                     {% if filter.state.active %}
                         <a class="sidebar-filters-item all" href="{{ path(page_route, filter.resetUrlParameters|merge(default_route_parameters)) }}">{{ "filter.all"|trans }}</a>
                     {% endif %}
@@ -57,15 +70,15 @@
     {% endif %}
 {% endmacro %}
 
-{% macro price_select(filter, page_route, url_param, range) %}
+{% macro price_select(filter, page_route, url_param, range, compare) %}
     <span class="sidebar-filters-item-checkbox
-                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == url_param%}
+                           {% if filter.getUrlParameters()['price'] is defined and filter.getUrlParameters()['price'] == compare %}
                            glyphicon-ok{% endif %} glyphicon"></span>
     <a href="{% if 'ongr_route' in app.request.attributes.get('_route') %}
-             {{ path(page_route, filter.getUrlParameters()|merge({"price":url_param})) }}
+             {{ path(page_route, (filter.getUrlParameters()|merge(app.request.query.all))|merge({"price":url_param})) }}
          {% else %}
              {{ path(app.request.attributes.get('_route'), filter.getUrlParameters()|merge({"price":url_param})) }}
          {% endif %}"
        class="sidebar-filters-item ">
-        {{ range }} €</a>
+        {{ range }}</a>
 {% endmacro %}

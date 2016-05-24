@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new ONGR\ApiBundle\ONGRApiBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new AppBundle\AppBundle(),
+            new Tedivm\StashBundle\TedivmStashBundle(),
+            new ONGR\CurrencyExchangeBundle\ONGRCurrencyExchangeBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

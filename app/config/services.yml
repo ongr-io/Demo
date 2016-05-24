@@ -32,6 +32,12 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.currency_extension:
+            class: AppBundle\Twig\CurrencyExtension
+            arguments: ["@ongr_currency_exchange.currency_exchange_service"]
+            tags:
+                - { name: twig.extension }
+
     app.translation_extension:
         class: AppBundle\Twig\TranslationExtension
         arguments: [%app_locales%]

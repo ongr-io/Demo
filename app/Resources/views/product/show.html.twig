@@ -98,9 +98,17 @@
             </div>
             <span class="product-price">
                 {% if variant is defined and variant.price is defined and variant.price != 0 %}
-                    {{ variant.price|number_format(2, ',', ' ') }} €
+                    {% if app.request.query.get('curr') == 'dollar' %}
+                        {{ variant.price|ongr_price(2, 'USD') }}
+                    {% else %}
+                        {{ variant.price|ongr_price(2) }}
+                    {% endif %}
                 {% else %}
-                    {{ product.price|number_format(2, ',', ' ') }} €
+                    {% if app.request.query.get('curr') == 'dollar' %}
+                        {{ product.price|ongr_price(2, 'USD') }}
+                    {% else %}
+                        {{ product.price|ongr_price(2) }}
+                    {% endif %}
                 {% endif %}
             </span>
             <button class="product-add-to-cart">{{ 'product.add_to_cart'|trans }}</button>

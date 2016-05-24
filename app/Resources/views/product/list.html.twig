@@ -145,7 +145,11 @@
                         <h5 class="product-title">
                             <a class="product-link" href="{{ product_url }}">{{ product.title|translation_text }}</a>
                         </h5>
-                        <strong class="product-price">{{ product.price|number_format(2, ',', ' ') }} €</strong>
+                        {% if app.request.query.get('curr') == 'dollar' %}
+                            <strong class="product-price">{{ product.price|ongr_price(2, 'USD') }}</strong>
+                        {% else %}
+                            <strong class="product-price">{{ product.price|ongr_price(2) }}</strong>
+                        {% endif %}
                     </div>
                 {% endif %}
             {% endfor %}

@@ -41,19 +41,52 @@
                 </ul>
             </div>
             <div class="col-xs-7 col-sm-4 col-md-4 col-lg-4">
-                {#<div class="topbar-additional topbar-currency topbar-dropdown pull-right">#}
-                    {#<span class="topbar-additional-selected">{{ 'currency.dollar'|trans }}</span>#}
-                    {#<div class="topbar-dropdown-content">#}
-                        {#<ul class="topbar-additional-list">#}
-                            {#<li class="topbar-additional-list-item">#}
-                                {#<a href="#">{{ 'currency.euro'|trans }}</a>#}
-                            {#</li>#}
-                            {#<li class="topbar-additional-list-item">#}
-                                {#<a href="#">{{ 'currency.pound'|trans }}</a>#}
-                            {#</li>#}
-                        {#</ul>#}
-                    {#</div>#}
-                {#</div>#}
+                <div class="topbar-additional topbar-currency topbar-dropdown pull-right">
+                    <span class="topbar-additional-selected"><img src="
+                        {% if app.request.query.get('curr') == 'dollar'%}
+                            {{ asset('images/dollar.png') }}" alt="dollar"> {{ 'currency.dollar'|trans }}</span>
+                        {% else %}
+                            {{ asset('images/euro.png') }}" alt="euro"> {{ 'currency.euro'|trans }}</span>
+                        {% endif %}
+                    <div class="topbar-dropdown-content">
+                        <ul class="topbar-additional-list">
+                            <li class="topbar-additional-list-item">
+                                {% if app.request.query.get('curr') == 'dollar'%}
+                                    <a href="
+                                        {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                            {% if category is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'euro', 'document': category})) }}
+                                            {% elseif product is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'euro', 'document': product})) }}
+                                            {% endif %}
+                                        {% else %}
+                                            {% if category is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'euro', 'document': category})) }}
+                                            {% elseif product is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'euro', 'document': product})) }}
+                                            {% endif %}
+                                        {% endif %}"><img src="{{ asset('images/euro.png') }}" alt="euro"> {{ 'currency.euro'|trans }}</a>
+                                {% else %}
+                                    <a href="
+                                        {% if 'ongr_route' in app.request.attributes.get('_route') %}
+                                            {% if category is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'dollar', 'document': category})) }}
+                                            {% elseif product is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'dollar', 'document': product})) }}
+                                            {% endif %}
+                                        {% else %}
+                                            {% if category is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'dollar', 'document': category})) }}
+                                            {% elseif product is defined %}
+                                                {{ path('ongr_route', app.request.query.all|merge({'curr':'dollar', 'document': product})) }}
+                                            {% endif %}
+                                        {% endif %}"><img src="{{ asset('images/dollar.png') }}" alt="euro"> {{ 'currency.dollar'|trans }}</a>
+                                {% endif %}
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 {% if product is defined %}
                     {{ render_translation_selection(product) }}
                 {% elseif category is defined %}

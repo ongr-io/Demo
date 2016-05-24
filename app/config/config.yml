@@ -86,6 +86,7 @@ ongr_elasticsearch:
             connection: default
             mappings:
                 - AppBundle
+                - ONGRCurrencyExchangeBundle
 
 ongr_filter_manager:
     managers:
@@ -177,3 +178,23 @@ app:
                     - { label: filter.price_desc, field: price, order: desc }
                     - { label: filter.title_asc, field: title.%locale%.text.raw }
                     - { label: filter.title_desc, field: title.%locale%.text.raw, order: desc }
+stash:
+    caches:
+        files:
+            drivers: [ FileSystem ]
+            FileSystem:
+                dirSplit:        2
+                path:            %kernel.cache_dir%/stash
+                filePermissions: 0660
+                dirPermissions:  0770
+                memKeyLimit:     20
+ongr_currency_exchange:
+    es_manager: default
+    default_currency: EUR
+    cache: stash.files_cache
+    separators:
+        decimal: ','
+        thousands: '.'
+    currencies:
+        EUR: "%s €"    # %s stands for the price itself
+        USD: "$ %s"
