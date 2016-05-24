@@ -83,18 +83,24 @@ class ProductListExtension extends \Twig_Extension
 
     /**
      * Returns top products.
-     * @param int $limit
      * @return mixed
      */
-    public function getTopProducts($limit = 4)
+    public function getTopProducts()
     {
         $repository = $this->manager->getRepository('AppBundle:Product');
-
-        /** @var Search $search */
-        $search = $repository->createSearch();
-        $search->setSize($limit);
-
-        $products = $repository->execute($search);
+        $names = [
+            'Bread Board Set Plato',
+            'Chip & Dip Set Chipster',
+            'Salad Bowl Savore',
+            'Cage Clock',
+            'Tray Set Spun Lazy Susan',
+            'Photo Display U Love',
+            'Candleholder Nordic Light 4 arms'
+        ];
+        $products =[];
+        foreach ($names as $name) {
+            $products[] = $repository->findOneBy(['title.en.text' => $name]);
+        }
 
         return $products;
     }

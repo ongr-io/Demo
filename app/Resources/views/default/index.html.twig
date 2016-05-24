@@ -1,4 +1,4 @@
-{% set products = top_products(4) %}
+{% set products = top_products() %}
 {% extends 'base.html.twig' %}
 
 {% block content_wrapper %}
@@ -13,7 +13,7 @@
                             <li data-target="#featured-carousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner" role="listbox">
-                            {% for index, product in products %}
+                            {% for index, product in products|slice(0,3) %}
                                 <div class="item {% if index == 0 %}active{% endif %}">
                                     <div class="featured-carousel-img" style="background-image:url({{ product_image(product) }});">
                                         <a class="featured-carousel-view" href="{{ product.url | translation_url }}">
@@ -28,7 +28,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="row">
-                    {% for product in products %}
+                    {% for product in products|slice(3, 6) %}
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 home-page-featured-small-bp">
                             <div class="home-page-featured-small" style="background-image:url('{{ product_image(product) }}');">
                                 <div class="home-page-featured-caption">
