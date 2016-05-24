@@ -155,7 +155,7 @@
     {% if filters.pager is defined %}
         <div class="list-pagination clearfix">
             {% set parameters = {'document': category} %}
-            {% set parameters = parameters|merge(filters.pager.getUrlParameters()) %}
+            {% set parameters = parameters|merge(app.request.query.all) %}
             <div class="pull-right">{{ ongr_paginate(filters.pager.pager, 'ongr_route', parameters) }}</div>
         </div>
     {% endif %}
