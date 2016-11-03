@@ -62,7 +62,7 @@ vagrant ssh
 Run project setup. There are bunch of commands to install vendors, assets and the demo data.
 
 ```bash
-composer install --no-interaction
+composer install --prefer-dist --no-interaction
 npm install
 bower install
 gulp
